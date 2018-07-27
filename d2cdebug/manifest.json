@@ -1,0 +1,43 @@
+{
+  "name": "D2CMedia devtools",
+  "version": "1.0.0",
+  "description": "Chrome DevTools extension for debugging D2CMedia Compiled Site.",
+  "manifest_version": 2,
+  "devtools_page": "background.html",
+  "web_accessible_resources": [
+    "devtools.html",
+    "background.html",
+    "src/backend.js"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action" :{
+    "default_icon" : "icons/ic_launcher-s.png",
+    "default_title" : "D2CMedia Debug"
+  },
+  "icons" : {
+    "48" : "icons/ic_launcher-r.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*"
+      ],
+      "js": [
+        "src/hooks.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file:///*",
+    "contextMenus",
+    "declarativeContent"
+  ]
+}
