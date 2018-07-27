@@ -3,6 +3,16 @@
 // D2CMedia presence on the page. If yes, create the D2CMedia panel; otherwise poll
 // for 10 seconds.
 
+//import Const from './constant';
+
+const Const = {
+  INIT: 0x201,
+  INJECT: 0x202,
+  ONDATA: 0x302,
+  TOOLNAME: 'd2cmedia-devtool-inspector',
+  CONTENTNAME: 'd2cmedia-devtool-content'
+};
+
 console.log('[devtools-background.js] loaded');
 
 let panelLoaded = false
@@ -72,9 +82,13 @@ chrome.runtime.onConnect.addListener(portConnection => {
     //on set le port pour cette connection pour pouvoir reparler avec a devtools.js
     connections[message.tabId] = portConnection;
     //on reparle a la devtools.js comme quoi on bien recu son message
-    connections[message.tabId].postMessage({
-       message: 'OK message received'
-    });
+    if(typeof message.name !== 'undefined' && typeof message.command !== 'undefined' 
+      && message.name === Const.TOOLNAME && message.command === Const.INIT){
+      connections[message.tabId].postMessage({
+        name: Const.TOOLNAME,
+        command: Const.INJECT
+      });
+    }
   }
   //put the function as the listener
   portConnection.onMessage.addListener(portListener);
@@ -85,7 +99,6 @@ chrome.runtime.onConnect.addListener(portConnection => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('[devtools-background.js] chrome.runtime.onMessage:');
   console.log(message);
-  message.route += '[devtools-background.js]';
   connections[sender.tab.id].postMessage(message);
   return true;
 });

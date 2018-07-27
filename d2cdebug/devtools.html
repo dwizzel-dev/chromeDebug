@@ -3,12 +3,51 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style>
+    <style type="text/css">
+      div {
+        font-size: 1.0em;
+      }
+      div.content{
+        margin-bottom: 10px;
+      }
+      div.row{
+        border: 1px solid #999;
+        margin-bottom: 10px;
+      }
+      div.cell{
+        padding: 10px;
+        border-bottom:1px solid #ddd;
+      }
+      div.cell.code{
+        background-color: #f2f2f2;
+        font-size: 1.3em;
+        margin: 10px;
+        border: 1px solid #ddd;
+      }
+      div.cell.filter{
+        font-size: 0.8em;
+        color: #888;
+        padding: 5px 10px;
+      }
+      div.cell.method{
+        font-size: 1.1em;
+        background-color: rgba(198, 215, 243, 0.4);
+        font-weight: bold;
+      }
+      div.cell.file{
+        color:cornflowerblue;
+      }
+      div.cell:last-child{
+        border-bottom:0;
+      }
+      xmp{
+        white-space: normal;
+      }
     </style>
   </head>
   <body>
     <h1>Dev Tools For D2C Media</h1>
-    <div id="container"></div>
+    <div class="container"></div>
     <script src="./src/devtools.js"></script>
   </body>
 </html>

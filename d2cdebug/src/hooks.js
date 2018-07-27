@@ -3,6 +3,12 @@
 
 console.log('[hooks.js] loaded');
 
+const Const = {
+  LOAD: 0x301,
+  ONDATA: 0x302,
+  CONTENTNAME: 'd2cmedia-devtool-content',
+};
+
 // attend pour un message du backend.js qui est injecte par le devtools.js
 console.log('[hooks.js] listening for message from [backend.js]');
 window.addEventListener('message', event => {
@@ -11,12 +17,21 @@ window.addEventListener('message', event => {
   }
   var message = event.data;
   //on verifie que ca vient bien du bon backend.js
-  if (typeof message !== 'object' || message === null || !message.source === 'devtool-d2cmedia') {
+  if (typeof message !== 'object' || message === null || !message.source === Const.CONTENTNAME) {
     return;
   }
   console.log('[hooks.js] onEvent');
   console.log(message);
-  message.route += '[hooks.js]';
-  //on envoie un message au devtool-backgound.js
-  chrome.runtime.sendMessage(message);
+  
+  if(typeof message.command !== "undefined" && typeof message.data !== 'undefined' && message.command === Const.LOAD){
+    //on envoie un message au devtool-backgound.js
+    console.log('[hooks.js] sending data to [devtool-background.js]');
+    chrome.runtime.sendMessage({
+      name: Const.CONTENTNAME,
+      data: message.data,
+      command: Const.ONDATA 
+    });  
+  }else{
+    console.log('[hooks.js] Command or Data Not Found');
+  }
 });
