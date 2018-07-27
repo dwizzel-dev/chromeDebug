@@ -93,8 +93,8 @@ function writeDataToPanel(data){
   for(let o in data){
     html += '<div class="row">';
     html += `<div class="cell method">${data[o]['from']['class']}::${data[o]['from']['method']}</div>`;  
-    html += `<div class="cell file">${data[o]['from']['file']} -- ${data[o]['from']['line']}</div>`;  
-    html += `<div class="cell code"><xmp>${data[o]['obj']}</xmp></div>`;  
+    html += `<div class="cell file">${data[o]['from']['file']} <span class="line">${data[o]['from']['line']}</span></div>`;  
+    html += `<div class="cell code"><xmp>${JSON.stringify(data[o]['obj'])}</xmp></div>`;  
     html += `<div class="cell filter">filter: ${data[o]['filter']}</div>`;  
     html += '</div>';
   }
