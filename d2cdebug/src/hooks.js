@@ -3,7 +3,7 @@
 
 console.log('[hooks.js] loaded');
 
-const Const = {
+let Const = {
   LOAD: 0x301,
   ONDATA: 0x302,
   CONTENTNAME: 'd2cmedia-devtool-content',

@@ -8,6 +8,7 @@
 const Const = {
   INIT: 0x201,
   INJECT: 0x202,
+  CLEAR: 0x203,
   ONDATA: 0x302,
   TOOLNAME: 'd2cmedia-devtool-inspector',
   CONTENTNAME: 'd2cmedia-devtool-content'
@@ -17,15 +18,16 @@ console.log('[devtools-background.js] loaded');
 
 let panelLoaded = false
 let panelShown = false
-let pendingAction
 let created = false
 let checkCount = 0
 
-// si on reload ou change de page dans la meme page que l'on inspecte
+// si on reload ou change de page que le inspect tab de "D2CMedia" est deja ouvert
 chrome.devtools.network.onNavigated.addListener(createPanelIfHasD2CMedia);
 
 //check avec un timer pour voir si on doit creer ou pas le panel
 const checkD2CMediaInterval = setInterval(createPanelIfHasD2CMedia, 1000);
+
+createPanelIfHasD2CMedia();
 
 //ceer le tab panel si la condition est bonne on essaye avec un timer plusieurs fois si long a loader
 function createPanelIfHasD2CMedia (){
@@ -92,8 +94,42 @@ chrome.runtime.onConnect.addListener(portConnection => {
   }
   //put the function as the listener
   portConnection.onMessage.addListener(portListener);
-
 });
+
+//check pour un refresh sur un chrome tab
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  console.log('[devtools-background.js] chrome.tabs.onUpdated:' + tabId);
+  //est-ce qu'il nous appratient
+  if(typeof connections[tabId] !== 'undefined'){
+    console.log('[devtools-background.js] tab update:' + tabId);
+    //si le refresh le load est termine 
+    if(changeInfo.status === 'complete'){
+      //check si est debuggable si jamais il navigue sur une autre page qui 
+      chrome.devtools.inspectedWindow.eval(
+        'window.D2CMediaDebug',
+        res => {
+          if(res){
+            //aller recherche le content une autre fois 
+            //en injectant le script backend.js de nouveau qui va aller chercher le resultat
+            //via le devtools.js
+            connections[tabId].postMessage({
+              name: Const.TOOLNAME,
+              command: Const.INJECT
+            });   
+          }else{
+            //on clear la page 
+            //via le devtools.js
+            connections[tabId].postMessage({
+              name: Const.TOOLNAME,
+              command: Const.CLEAR
+            }); 
+          }
+        }
+      );
+    }
+  }
+});
+
 
 // les messages que l'on recoit de hooks.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

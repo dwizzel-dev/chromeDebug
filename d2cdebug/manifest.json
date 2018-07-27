@@ -25,7 +25,9 @@
   "content_scripts": [
     {
       "matches": [
-        "file:///*"
+        "file:///*",
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "src/hooks.js"

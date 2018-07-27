@@ -5,6 +5,7 @@
 const Const = {
   INIT: 0x201,
   INJECT: 0x202,
+  CLEAR: 0x203,
   ONDATA: 0x302,
   TOOLNAME: 'd2cmedia-devtool-inspector',
   CONTENTNAME: 'd2cmedia-devtool-content'
@@ -33,6 +34,10 @@ bgPageConnection.onMessage.addListener(message => {
             console.log('[devtool.js] injection callback');
           });
           break;
+        case Const.CLEAR:
+          console.log('[devtool.js] clearing panel page content');
+          writeDataToPanel(false);
+          break;  
         default:
           break;  
       }
@@ -90,13 +95,19 @@ function writeDataToPanel(data){
   // HTML element to output our data.
   const output = document.querySelector('.container');
   let html = '<div class="content">';
-  for(let o in data){
-    html += '<div class="row">';
-    html += `<div class="cell method">${data[o]['from']['class']}::${data[o]['from']['method']}</div>`;  
-    html += `<div class="cell file">${data[o]['from']['file']} <span class="line">${data[o]['from']['line']}</span></div>`;  
-    html += `<div class="cell code"><xmp>${JSON.stringify(data[o]['obj'])}</xmp></div>`;  
-    html += `<div class="cell filter">filter: ${data[o]['filter']}</div>`;  
-    html += '</div>';
+  if(data === false){
+    html += 'Not a D2CMedia Debugable page';
+  }else if(data.lenght <= 0){
+    html += 'No content to show'
+  }else{
+    for(let o in data){
+      html += '<div class="row">';
+      html += `<div class="cell method">${data[o]['from']['class']}::${data[o]['from']['method']}</div>`;  
+      html += `<div class="cell file">${data[o]['from']['file']} <span class="line">${data[o]['from']['line']}</span></div>`;  
+      html += `<div class="cell code"><xmp>${JSON.stringify(data[o]['obj'])}</xmp></div>`;  
+      html += `<div class="cell filter">filter: ${data[o]['filter']}</div>`;  
+      html += '</div>';
+    }
   }
   html += '</div>';
   output.innerHTML = html;

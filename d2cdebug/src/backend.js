@@ -3,7 +3,7 @@
 
 console.log('[backend.js] loaded');
 
-const Const = {
+let Const = {
   LOAD: 0x301,
   CONTENTNAME: 'd2cmedia-devtool-content'
 };
