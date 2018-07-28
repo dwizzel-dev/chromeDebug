@@ -4,9 +4,13 @@
     <meta charset="utf-8">
     <title></title>
     <style type="text/css">
+      body{
+        background-color: #222;
+      }
       h1{
         color:#888;
       }
+      
       div {
         font-size: 1.0em;
       }
@@ -18,46 +22,51 @@
         color: #888;
       }
       div.row{
-       margin-bottom: 20px;
+        background-color: #333;
+        /* border-top: 1px solid rgb(207, 208, 208); */
+        margin: 0 0 20px 0;
+        padding: 0;
       }
+      
+      h2{
+        font-size: 1.3em;
+        background-color: #555;
+        font-weight: normal;
+        color: #86e1ff;
+        padding: 10px;
+        margin: 0;
+      }
+      h2 span.classname{
+        color: #fff;
+      }
+
+      h3{
+        color:#00bfff;
+        font-weight: normal;
+        padding: 0px 10px;
+      }
+      h3 span.line{
+        margin-left:10px;
+        font-weight: bold;
+      }
+
       div.cell{
         padding: 10px;
       }
       div.cell.code{
-        background-color: #f2f2f2;
+        background-color: #f8f8ff;
         font-size: 1.4em;
-        margin: 10px;
+        margin: 0 10px;
       }
       div.cell.filter{
-        font-size: 0.9em;
-        color: #888;
-        padding: 5px 10px;
+        color: #aaa;
       }
-      div.cell.method{
-        font-size: 1.3em;
-        background-color: #555;
-        font-weight: normal;
-        border-top: 1px solid rgb(207, 208, 208);
-        color: rgb(207, 208, 208);
-      }
-      div.cell.method span.classname{
-        color: darkseagreen;
-      }
-      div.cell.file{
-        color:cornflowerblue;
-        font-size: 1.1em;
-      }
-      div.cell.file span.line{
-        margin-left:10px;
-        font-weight: bold;
-      }
-      div.cell:last-child{
-        border-bottom:0;
-      }
+      
       xmp{
         white-space: normal;
         word-wrap: break-word;
       }
+
     </style>
   </head>
   <body>
