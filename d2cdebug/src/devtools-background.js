@@ -9,6 +9,7 @@ const Const = {
   INIT: 0x201,
   INJECT: 0x202,
   CLEAR: 0x203,
+  LOADING: 0x204,
   ONDATA: 0x302,
   TOOLNAME: 'd2cmedia-devtool-inspector',
   CONTENTNAME: 'd2cmedia-devtool-content'
@@ -103,7 +104,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if(typeof connections[tabId] !== 'undefined'){
     console.log('[devtools-background.js] tab update:' + tabId);
     //si le refresh le load est termine 
-    if(changeInfo.status === 'complete'){
+    if(changeInfo.status === 'loading'){
+      connections[tabId].postMessage({
+        name: Const.TOOLNAME,
+        command: Const.LOADING
+      });    
+    }else if(changeInfo.status === 'complete'){
       //check si est debuggable si jamais il navigue sur une autre page qui 
       chrome.devtools.inspectedWindow.eval(
         'window.D2CMediaDebug',
