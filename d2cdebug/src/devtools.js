@@ -46,7 +46,7 @@ const PanelWriter = {
       if(data === Const.CLEAR){
         output.innerHTML = ``;  
       }else{
-        output.innerHTML = `<div class="content"><h2><span class="classname">Page Analyser</h2><div class="cell code"></div></div>`;
+        output.innerHTML = `<div class="content"><h2>Tag Analyser</h2><div class="cell code"></div></div>`;
         $(`.analysed-view .code`).jsonView(data);
       }
     }
@@ -68,7 +68,11 @@ const PanelWriter = {
     }
   },
   prettyCode(){
-    //$("<pre/>").addClass(['prettyprint', 'linenums', 'theme-snappy-light']);
+    //indente le code si il y a lieu
+    $(`pre`).each(function(index){
+      $(this).text(formatFactory(($(this).text())));
+    });
+    //prettyfier , mais il va le faire sur les test standard aussi, 
     prettyPrint();
   },
   wrtOutput: data => {
@@ -78,11 +82,13 @@ const PanelWriter = {
     }
   },
   wrtRow(id, data){
+    //dont care si h3 dans le h2, jsute pour manipule les css plus facilment par tag
     return `<div class="row" id="${id}">
-      <h2><span class="classname">${data.from.class} :: </span>${data.from.method}</h2>  
-      <h3>${data.from.file} <span class="line">${data.from.line}</span></h3>  
+      <h2><span class="classname">${data.from.class} :: </span>${data.from.method}
+        <div class="file">${data.from.file} <span class="line">${data.from.line}</span></div>
+      </h2>  
       <div class="cell code">${this.wrtObj(id, data.obj)}</div>
-      <div class="cell filter">filter: ${data.filter}</div>
+      <div class="cell filter">Filter: ${data.filter}</div>
       </div>`;
   },
   wrtObj(id, data){
@@ -90,8 +96,13 @@ const PanelWriter = {
       this.appendScript(id, data);
       return ``;
     }else{
+      //il faudrait au moins checker si il y a du html dedans avec des <>
+      style =  '';
+      if(RegExp('^<.*>$','g').test(data)){
+        style =  'prettyprint theme-snappy-light';    
+      }
       str = data.replace(/>/g,"&gt;").replace(/</g,"&lt;");
-      return `<pre class="prettyprint theme-snappy-light">${str}</pre>`;
+      return `<pre class="${style}">${str}</pre>`;
     }
   },
   wrt(data){
@@ -220,3 +231,48 @@ function injectScript(scriptName, cb){
     cb(res);
   })
 }
+
+
+function formatFactory(html) {
+  function parse(html, tab = 0) {
+      var tab;
+      var html = $.parseHTML(html);
+      var formatHtml = new String();   
+
+      function setTabs () {
+          var tabs = new String();
+
+          for (i=0; i < tab; i++){
+            tabs += '  '; // double space car un tab est trop gros
+          }
+          return tabs;    
+      };
+
+
+      $.each( html, function( i, el ) {
+          if (el.nodeName == '#text') {
+              if (($(el).text().trim()).length) {
+                  formatHtml += setTabs() + $(el).text().trim() + '\n';
+              }    
+          } else {
+              var innerHTML = $(el).html().trim();
+              $(el).html(innerHTML.replace('\n', '').replace(/ +(?= )/g, ''));
+              
+
+              if ($(el).children().length) {
+                  $(el).html('\n' + parse(innerHTML, (tab + 1)) + setTabs());
+                  var outerHTML = $(el).prop('outerHTML').trim();
+                  formatHtml += setTabs() + outerHTML + '\n'; 
+
+              } else {
+                  var outerHTML = $(el).prop('outerHTML').trim();
+                  formatHtml += setTabs() + outerHTML + '\n';
+              }      
+          }
+      });
+
+      return formatHtml;
+  };   
+  
+  return parse(html.replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,''));
+}; 
