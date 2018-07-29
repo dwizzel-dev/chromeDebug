@@ -11,6 +11,7 @@ const Const = {
   LOADING: 0x204,
   EMPTY: 0x205,
   ONDATA: 0x302,
+  ONANALYSED: 0x303,
   TOOLNAME: 'd2cmedia-devtool-inspector',
   CONTENTNAME: 'd2cmedia-devtool-content'
 };
@@ -39,6 +40,17 @@ const Consolas = {
 const PanelWriter = {
   scripts: [],
   wrtMsg: data => `<span class="msg">${data}</span>`,
+  wrtAnalyzed(data){
+    const output = document.querySelector('.analysed-view');
+    if(typeof output !== 'undefined'){
+      if(data === Const.CLEAR){
+        output.innerHTML = ``;  
+      }else{
+        output.innerHTML = `<div class="content"><h2><span class="classname">Page Analyser</h2><div class="cell code"></div></div>`;
+        $(`.analysed-view .code`).jsonView(data);
+      }
+    }
+  },
   appendScript(id, data){
     this.scripts.push({
       id: id,
@@ -127,17 +139,25 @@ bgPageConnection.onMessage.addListener(message => {
         case Const.INJECT:
           Consolas.log('[devtool.js] injecting "backend.js" to inspected content page');
           //injecte le script backend.js dans la content-page (page web que lon inspect) et attend le result
-          injectScript(chrome.runtime.getURL('src/backend.js'), res => {
+          injectScript(chrome.runtime.getURL('lib/jquery/3.3.1/jquery.min.js'), res => {
             Consolas.log('[devtool.js] injection callback');
           });
+          //avec un delai dessus pour que le jquery soit loade avant
+          setTimeout(() => {
+            injectScript(chrome.runtime.getURL('src/backend.js'), res => {
+              Consolas.log('[devtool.js] injection callback');
+            });  
+          }, 1000);
           break;
         case Const.CLEAR:
           Consolas.log('[devtool.js] clearing panel page content');
           PanelWriter.wrt(Const.CLEAR);
+          PanelWriter.wrtAnalyzed(Const.CLEAR);
           break;  
         case Const.LOADING:
           Consolas.log('[devtool.js] clearing panel page content');
           PanelWriter.wrt(Const.LOADING);
+          PanelWriter.wrtAnalyzed(Const.CLEAR);
           break;    
         default:
           break;  
@@ -152,6 +172,14 @@ bgPageConnection.onMessage.addListener(message => {
             PanelWriter.wrt(message.data);  
           }
           break;
+        case Const.ONANALYSED:
+          Consolas.log('[devtool.js] analyse to panel');
+          if(message.data.length === 0){
+            PanelWriter.wrtAnalyzed(Const.CLEAR);
+          }else{
+            PanelWriter.wrtAnalyzed(message.data);
+          }
+          break;  
         default:
           break;  
       } 
@@ -179,7 +207,7 @@ function injectScript(scriptName, cb){
     (function() {
       var script = document.constructor.prototype.createElement.call(document, 'script');
       script.src = "${scriptName}";
-      console.log('[devtool.js] Injecting script in content page');
+      console.log('[devtool.js] Injecting ${scriptName} script in content page');
       console.log(script);
       document.documentElement.appendChild(script);
       //script.parentNode.removeChild(script);

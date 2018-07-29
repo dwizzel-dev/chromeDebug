@@ -11,6 +11,7 @@ const Const = {
   CLEAR: 0x203,
   LOADING: 0x204,
   ONDATA: 0x302,
+  ONANALYSED: 0x303,
   TOOLNAME: 'd2cmedia-devtool-inspector',
   CONTENTNAME: 'd2cmedia-devtool-content'
 };
@@ -137,7 +138,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 
-// les messages que l'on recoit de hooks.js
+// les messages que l'on recoit de hooks.js on relai au devtools.js du tab associe
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log('[devtools-background.js] chrome.runtime.onMessage:');
   console.log(message);
