@@ -24,9 +24,9 @@ div.content span.msg{
 }
 div.row{
   background-color: #333;
-  /* border-top: 1px solid rgb(207, 208, 208); */
   margin: 0 0 20px 0;
   padding: 0;
+  border-top: 1px solid #666;
 }
 
 h2{
@@ -60,18 +60,15 @@ div.cell{
 }
 div.cell.code{
   background-color: #f8f8ff;
-  font-size: 1.0em;
+  font-size: 0.9em;
   margin: 0;
   width:100%;
 }
 div.cell.code.treeview{
-  font-size: 0.8em;
-  line-height:initial; 
-  margin: 0;
-  width:100%;
+  font-size: inherit;
 }
 div.cell.filter{
-  color: #aaa;
+  color: #888;
   font-size: 0.8em;
 }
 

@@ -63,7 +63,7 @@ const PanelWriter = {
   runScripts(){
     if(this.scripts.length > 0){
       for(let o in this.scripts){
-       $(`#${this.scripts[o].id} .code`).jsonView(this.scripts[o].data);
+       $(`#${this.scripts[o].id} .code`).addClass('treeview').jsonView(this.scripts[o].data);
       }
     }
   },
