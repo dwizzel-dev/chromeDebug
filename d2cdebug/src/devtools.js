@@ -46,7 +46,7 @@ const PanelWriter = {
       if(data === Const.CLEAR){
         output.innerHTML = ``;  
       }else{
-        output.innerHTML = `<div class="content"><h2>Tag Analyser</h2><div class="cell code"></div></div>`;
+        output.innerHTML = `<div class="content"><h2>SEO Basics</h2><div class="cell code"></div></div>`;
         $(`.analysed-view .code`).jsonView(data);
       }
     }
@@ -83,7 +83,7 @@ const PanelWriter = {
   },
   wrtRow(id, data){
     //dont care si h3 dans le h2, jsute pour manipule les css plus facilment par tag
-    return `<div class="row" id="${id}">
+    return `<div class="row type-${data.type}" id="${id}">
       <h2><span class="classname">${data.from.class} :: </span>${data.from.method}
         <div class="file">${data.from.file} <span class="line">${data.from.line}</span></div>
       </h2>  

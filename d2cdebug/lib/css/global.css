@@ -42,8 +42,19 @@ h2 span.classname{
   color: #07dcf7;
 }
 
+div.row.type-2 h2{
+  background-color: #074e9a;
+}
+div.row.type-3 h2{
+  background-color: #c80000;
+}
+div.row.type-4 h2{
+  background-color: #236e25;
+}
+
+
 h2 div.file{
-  color: #aaa;
+  color: #c0c0c0;
   font-weight: normal;
   padding: 5px 0;
   font-size: 0.9rem;
@@ -87,6 +98,7 @@ pre{
 }
 
 .analysed-view h2{
-  background-color: #607d8b;
-  color: #fff;
+  background-color: #333;
+  color: #4CAF50;
+  border-top: 1px solid #666;
 }
