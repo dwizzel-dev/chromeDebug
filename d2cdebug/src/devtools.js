@@ -37,27 +37,55 @@ const Consolas = {
 };
 
 const PanelWriter = {
+  scripts: [],
   wrtMsg: data => `<span class="msg">${data}</span>`,
+  appendScript(id, data){
+    this.scripts.push({
+      id: id,
+      data: data,
+    });
+  },
+  resetScripts(){
+    this.scripts = [];
+  },
+  runScripts(){
+    if(this.scripts.length > 0){
+      for(let o in this.scripts){
+       $(`#${this.scripts[o].id} .code`).jsonView(this.scripts[o].data);
+      }
+    }
+  },
+  prettyCode(){
+    //$("<pre/>").addClass(['prettyprint', 'linenums', 'theme-snappy-light']);
+    prettyPrint();
+  },
   wrtOutput: data => {
-    const output = document.querySelector('.container');
+    const output = document.querySelector('.content-view');
     if(typeof output !== 'undefined'){
       output.innerHTML = `<div class="content">${data}</div>`;
     }
   },
-  wrtRow: (self, data) => {
-    return `<div class="row">
+  wrtRow(id, data){
+    return `<div class="row" id="${id}">
       <h2><span class="classname">${data.from.class} :: </span>${data.from.method}</h2>  
       <h3>${data.from.file} <span class="line">${data.from.line}</span></h3>  
-      <div class="cell code"><xmp>${self.wrtObj(data.obj)}</xmp></div>
+      <div class="cell code">${this.wrtObj(id, data.obj)}</div>
       <div class="cell filter">filter: ${data.filter}</div>
       </div>`;
   },
-  wrtObj: data => {
-    return `${data}`;
+  wrtObj(id, data){
+    if(typeof data === 'object' || typeof data === 'array'){
+      this.appendScript(id, data);
+      return ``;
+    }else{
+      str = data.replace(/>/g,"&gt;").replace(/</g,"&lt;");
+      return `<pre class="prettyprint theme-snappy-light">${str}</pre>`;
+    }
   },
-  wrt: function(data){
+  wrt(data){
     Consolas.log('[devtool.js] data received');
     Consolas.log(data);
+    this.resetScripts();
     let content = '';
     switch(data){
       case Const.CLEAR:
@@ -70,12 +98,15 @@ const PanelWriter = {
         content = this.wrtMsg('Empty Data');
         break;   
       default:
+        let cmpt = 0;
         for(let k in data){
-          content += this.wrtRow(this, data[k]);
+          content += this.wrtRow(`treeView-${cmpt++}`, data[k]);
         }
         break;  
     }
     this.wrtOutput(content);
+    this.runScripts();
+    this.prettyCode();
   },
 };
 

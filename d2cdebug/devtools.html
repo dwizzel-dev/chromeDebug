@@ -4,74 +4,25 @@
     <meta charset="utf-8">
     <title></title>
     <style type="text/css">
-      body{
-        background-color: #222;
-      }
-      h1{
-        color:#888;
-      }
-      
-      div {
-        font-size: 1.0em;
-      }
-      div.content{
-        margin-bottom: 10px;
-      }
-      div.content span.msg{
-        font-size: 1.2em;
-        color: #888;
-      }
-      div.row{
-        background-color: #333;
-        /* border-top: 1px solid rgb(207, 208, 208); */
-        margin: 0 0 20px 0;
-        padding: 0;
-      }
-      
-      h2{
-        font-size: 1.3em;
-        background-color: #555;
-        font-weight: normal;
-        color: #86e1ff;
-        padding: 10px;
-        margin: 0;
-      }
-      h2 span.classname{
-        color: #fff;
-      }
-
-      h3{
-        color:#00bfff;
-        font-weight: normal;
-        padding: 0px 10px;
-      }
-      h3 span.line{
-        margin-left:10px;
-        font-weight: bold;
-      }
-
-      div.cell{
-        padding: 10px;
-      }
-      div.cell.code{
-        background-color: #f8f8ff;
-        font-size: 1.4em;
-        margin: 0 10px;
-      }
-      div.cell.filter{
-        color: #aaa;
-      }
-      
-      xmp{
-        white-space: normal;
-        word-wrap: break-word;
-      }
-
     </style>
   </head>
+  
+  <link rel="stylesheet" href="./lib/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./lib/css/global.css">
+  <link rel="stylesheet" href="./lib/css/jquery.json-view.min.css">
+  <link rel="stylesheet" href="./lib/google-code-prettify/prettify.css">
+  <link rel="stylesheet" href="./lib/css/snappy-light.css">
+
+  <script src="./lib/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>  
+  <script src="./lib/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./lib/google-code-prettify/prettify.js"></script>
+  <script src="./lib/js/jquery.json-view.min.js"></script>
+  <script src="./src/devtools.js"></script>
+  
   <body>
-    <h1>Dev Tools For D2C Media</h1>
-    <div class="container"></div>
-    <script src="./src/devtools.js"></script>
+    <div class="container">
+    <h1>Dev Tools For D2C Media</h1> 
+    <div class="content-view"></div>
+    </div>
   </body>
 </html>
