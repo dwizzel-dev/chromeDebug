@@ -17,11 +17,12 @@
     "persistent": false
   },
   "page_action" :{
-    "default_icon" : "icons/ic_launcher-s.png",
-    "default_title" : "D2CMedia Debug"
+    "default_icon" : "icons/ic_launcher-r.png",
+    "default_title" : "D2CMedia Debug",
+    "default_popup": "popups/popup.html"
   },
   "icons" : {
-    "48" : "icons/ic_launcher-r.png"
+    "48" : "icons/ic_launcher-s.png"
   },
   "content_scripts": [
     {

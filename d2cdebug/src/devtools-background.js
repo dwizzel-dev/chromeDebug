@@ -18,10 +18,12 @@ const Const = {
 
 console.log('[devtools-background.js] loaded');
 
-let panelLoaded = false
-let panelShown = false
-let created = false
-let checkCount = 0
+let panelLoaded = false;
+let panelShown = false;
+let created = false;
+let checkCount = 0;
+
+
 
 // si on reload ou change de page que le inspect tab de "D2CMedia" est deja ouvert
 chrome.devtools.network.onNavigated.addListener(createPanelIfHasD2CMedia);
@@ -35,11 +37,11 @@ createPanelIfHasD2CMedia();
 function createPanelIfHasD2CMedia (){
   console.log('[devtools-background.js] checking if "window.D2CMediaDebug" is present [' + checkCount + ']');
   if (created || checkCount++ > 10){
-    return
+    return;
   }
   
-  panelLoaded = false
-  panelShown = false
+  panelLoaded = false;
+  panelShown = false;
 
   //chec si a bien la variable que l'on attend pour savoir si on peut debugger cette page ou pas
   chrome.devtools.inspectedWindow.eval(
