@@ -85,7 +85,7 @@ const PanelWriter = {
     //comments et groupes stack
     comments = '';
     if(typeof data.comments !== 'undefined' && data.comments !== ''){
-      comments = `<div class="comments">comments: ${data.comments}</div>`;
+      comments = `<div class="comments">${data.comments}</div>`;
     }
     group = '';
     if(typeof data.group !== 'undefined' && data.group !== ''){
