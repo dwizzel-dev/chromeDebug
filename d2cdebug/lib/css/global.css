@@ -51,7 +51,16 @@ div.row.type-3 h2{
 div.row.type-4 h2{
   background-color: #236e25;
 }
-
+div.row.type-5 h2{
+  background-color: #795548;
+}
+h2 div.group{
+  font-weight: normal;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
 
 h2 div.file{
   color: #c0c0c0;
@@ -64,6 +73,13 @@ h2 div.file{
 h2 div.file span.line{
   margin-left:10px;
   font-weight: bold;
+}
+h2 div.comments{
+  font-weight: lighter;
+  font-size: 0.9rem;
+  padding: 10px 0;
+  font-style: oblique;
+  color: darkkhaki;  
 }
 
 div.cell{

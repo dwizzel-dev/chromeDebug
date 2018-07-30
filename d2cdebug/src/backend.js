@@ -11,41 +11,79 @@ let Const = {
 
 const PageAnalyser = {
   getH1(){
-    return $('H1').text().trim();
+    let arr = [];
+    let nodes = document.querySelectorAll('h1');
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        arr.push(nodes[i].innerText); 
+      }
+    }
+    return arr;
   },
   getH2(){
-    let h2 = [];
-    $('H2').each(function(index){
-      h2.push($(this).text().trim()); 
-    });  
-    return h2;
+    let arr = [];
+    let nodes = document.querySelectorAll('h2');
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        arr.push(nodes[i].innerText); 
+      }
+    }
+    return arr;
   },
   getH3(){
-    let h3 = [];
-    $('H3').each(function(index){
-      h3.push($(this).text().trim()); 
-    });
-    return h3;
+    let arr = [];
+    let nodes = document.querySelectorAll('h3');
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        arr.push(nodes[i].innerText); 
+      }
+    }
+    return arr;
   },
   getTitle(){
-    return $('TITLE').text();  
+    let nodes = document.getElementsByTagName('title') 
+    let title = '';
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        //suppose en avoir juste un seul
+        title = nodes[i].innerText; 
+      }
+    }
+    return title;  
   },
   getMeta(){
-    let meta = {};
-    $('META').each(function(index){
-      let name = '';
-      if(typeof $(this).attr('name') !== 'undefined'){
-        name = $(this).attr('name');
-      }else if(typeof $(this).attr('property') !== 'undefined'){
-        name = $(this).attr('property');
-      }else if(typeof $(this).attr('itemprop') !== 'undefined'){
-        name = $(this).attr('itemprop'); 
+    let metas = [];
+    let nodes = document.getElementsByTagName('meta'); 
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        let meta = {};
+        let attr = nodes[i].attributes;
+        if(attr !== null){
+          for(let j=0; j<attr.length;j++){
+            meta[attr[j].name] = attr[j].value;
+          }
+        }
+        metas.push(meta);
       }
-      if(name !== ''){
-        meta[name] = $(this).attr('content');  
-      } 
-    });
-    return meta;
+      if(metas.length > 0){
+        let arr = {};
+        for(let o in metas){
+          let k = null;
+          let v = null;
+          let obj = {};
+          for(let p in metas[o]){
+            if(p === 'content'){
+              v = metas[o][p];  
+            }else{
+              k = metas[o][p];        
+            }
+          }
+          arr[k] = v;
+        }
+        metas = arr;
+      }
+    }     
+    return metas;
   },
   getAll(){
     return {

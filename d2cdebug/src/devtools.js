@@ -82,10 +82,21 @@ const PanelWriter = {
     }
   },
   wrtRow(id, data){
-    //dont care si h3 dans le h2, jsute pour manipule les css plus facilment par tag
+    //comments et groupes stack
+    comments = '';
+    if(typeof data.comments !== 'undefined' && data.comments !== ''){
+      comments = `<div class="comments">comments: ${data.comments}</div>`;
+    }
+    group = '';
+    if(typeof data.group !== 'undefined' && data.group !== ''){
+      group = `<div class="group">${data.group}</div>`;
+    }
     return `<div class="row type-${data.type}" id="${id}">
-      <h2><span class="classname">${data.from.class} :: </span>${data.from.method}
+      <h2>
+        ${group}
+        <span class="classname">${data.from.class} :: </span>${data.from.method}
         <div class="file">${data.from.file} <span class="line">${data.from.line}</span></div>
+        ${comments}
       </h2>  
       <div class="cell code">${this.wrtObj(id, data.obj)}</div>
       <div class="cell filter">Filter: ${data.filter}</div>
@@ -150,15 +161,22 @@ bgPageConnection.onMessage.addListener(message => {
         case Const.INJECT:
           Consolas.log('[devtool.js] injecting "backend.js" to inspected content page');
           //injecte le script backend.js dans la content-page (page web que lon inspect) et attend le result
+          // cause des problemes si jquery nest pas la meme version que sur le content page
+          // on va tout faire en version vanilla javascript alors
+          /*
           injectScript(chrome.runtime.getURL('lib/jquery/3.3.1/jquery.min.js'), res => {
             Consolas.log('[devtool.js] injection callback');
           });
-          //avec un delai dessus pour que le jquery soit loade avant
           setTimeout(() => {
             injectScript(chrome.runtime.getURL('src/backend.js'), res => {
               Consolas.log('[devtool.js] injection callback');
             });  
           }, 1000);
+          */
+          //injecte seulement le backend sans le jquery
+          injectScript(chrome.runtime.getURL('src/backend.js'), res => {
+            Consolas.log('[devtool.js] injection callback');
+          });    
           break;
         case Const.CLEAR:
           Consolas.log('[devtool.js] clearing panel page content');
