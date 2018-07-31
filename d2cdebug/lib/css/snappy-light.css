@@ -1,7 +1,7 @@
 pre.theme-snappy-light {
   background-color: #ffffff;
-  padding: 2em;
-  font-size:.7em;
+  padding: 0;
+  /*font-size:0.7em;*/
   color: #555555;
 }
 
