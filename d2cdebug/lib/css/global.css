@@ -77,7 +77,6 @@ h2 div.file span.line{
 h2 div.comments{
   font-weight: lighter;
   font-size: 0.8rem;
-  padding: 10px 0;
   font-style: oblique;
   color: darkkhaki;  
 }
