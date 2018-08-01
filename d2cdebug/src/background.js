@@ -1,10 +1,10 @@
 
 // le script roule sur toute s les pages tel que mentionner dans le manifest.json
 
-console.log('[backgound.js] loaded');
+console.log('[D2CMedia Debug - backgound.js] loaded');
 
 // la declarative rules on install ou upgrade.
-console.log('[backgound.js] check if tag "d2cmediadebug" is present');
+//console.log('[backgound.js] check if tag "d2cmediadebug" is present');
 chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{

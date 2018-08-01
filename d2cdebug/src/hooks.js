@@ -1,7 +1,7 @@
 
 // iinjecte dans toute les pages web
 
-console.log('[hooks.js] loaded');
+console.log('[D2CMedia Debug - hooks.js] loaded');
 
 let Const = {
   LOAD: 0x301,
@@ -12,7 +12,7 @@ let Const = {
 };
 
 // attend pour un message du backend.js qui est injecte par le devtools.js
-console.log('[hooks.js] listening for message from [backend.js]');
+//console.log('[hooks.js] listening for message from [backend.js]');
 window.addEventListener('message', event => {
   if (event.source !== window) {
     return;
@@ -22,14 +22,14 @@ window.addEventListener('message', event => {
   if (typeof message !== 'object' || message === null || !message.source === Const.CONTENTNAME) {
     return;
   }
-  console.log('[hooks.js] onEvent');
-  console.log(message);
+  //console.log('[hooks.js] onEvent');
+  //console.log(message);
   
   if(typeof message.command !== "undefined" && typeof message.data !== 'undefined'){
     switch(message.command){
       case Const.LOAD:
         //on envoie un message au devtool-backgound.js
-        console.log('[hooks.js] sending load data to [devtool-background.js]');
+        //console.log('[hooks.js] sending load data to [devtool-background.js]');
         chrome.runtime.sendMessage({
           name: Const.CONTENTNAME,
           data: message.data,
@@ -38,7 +38,7 @@ window.addEventListener('message', event => {
         break;
       case Const.ANALYSED:
         //on envoie un message au devtool-backgound.js
-        console.log('[hooks.js] sending analysed data to [devtool-background.js]');
+        //console.log('[hooks.js] sending analysed data to [devtool-background.js]');
         chrome.runtime.sendMessage({
           name: Const.CONTENTNAME,
           data: message.data,
@@ -46,10 +46,10 @@ window.addEventListener('message', event => {
         });
         break;
       default:
-        console.log('[hooks.js] Command Not Found');
+        //console.log('[hooks.js] Command Not Found');
         break;
     }
   }else{
-    console.log('[hooks.js] Command or Data Not Found');
+    //console.log('[hooks.js] Command or Data Not Found');
   }
 });

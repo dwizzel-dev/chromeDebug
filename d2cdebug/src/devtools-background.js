@@ -16,7 +16,28 @@ const Const = {
   CONTENTNAME: 'd2cmedia-devtool-content'
 };
 
-console.log('[devtools-background.js] loaded');
+const Consolas = {
+  log: function(data){
+    if(this.options.enabled){
+      console.log(data);
+    }
+  },
+  warn: function(data){
+    if(this.options.enabled){
+      console.warn(data);
+    }
+  },
+  error: function(data){
+    if(this.options.enabled){
+      console.error(data);
+    }
+  },
+  options: {
+      enabled: true,
+  },
+};
+
+Consolas.log('[D2CMedia Debug - devtools-background.js] loaded');
 
 let panelLoaded = false;
 let panelShown = false;
@@ -35,8 +56,9 @@ createPanelIfHasD2CMedia();
 
 //ceer le tab panel si la condition est bonne on essaye avec un timer plusieurs fois si long a loader
 function createPanelIfHasD2CMedia (){
-  console.log('[devtools-background.js] checking if "window.D2CMediaDebug" is present [' + checkCount + ']');
+  Consolas.log('[devtools-background.js] checking if "window.D2CMediaDebug" is present [' + checkCount + ']');
   if (created || checkCount++ > 10){
+    clearInterval(checkD2CMediaInterval);
     return;
   }
   
@@ -48,13 +70,13 @@ function createPanelIfHasD2CMedia (){
     'window.D2CMediaDebug',
     hasD2CMedia => {
       if (!hasD2CMedia || created) {
-        console.log('[devtools-background.js] "window.D2CMediaDebug" Not Found');
+        Consolas.log('[devtools-background.js] "window.D2CMediaDebug" Not Found');
         return;
       }
-      console.log('[devtools-background.js] "window.D2CMediaDebug" Found');
+      Consolas.log('[devtools-background.js] "window.D2CMediaDebug" Found');
       clearInterval(checkD2CMediaInterval);
       created = true;
-      console.log('[devtools-background.js] creating panel "D2CMedia" and page load page "devtools.html"');
+      Consolas.log('[devtools-background.js] creating panel "D2CMedia" and page load page "devtools.html"');
       chrome.devtools.panels.create(
         'D2CMedia', 
         'icons/ic_launcher-r.png', 
@@ -73,18 +95,18 @@ function createPanelIfHasD2CMedia (){
 const connections = {};
 
 chrome.runtime.onConnect.addListener(portConnection => {
-  console.log('[devtools-background.js] chrome.runtime.onConnect:');
-  console.log(portConnection);
+  Consolas.log('[devtools-background.js] chrome.runtime.onConnect:');
+  Consolas.log(portConnection);
   //add the listener pour le deconnecte
   portConnection.onDisconnect.addListener(port => {
-    console.log('[devtools-background.js] portConnection.onDisconnect:');
+    Consolas.log('[devtools-background.js] portConnection.onDisconnect:');
     port.onMessage.removeListener(portListener);
   });
   //assigne une varible pour la delete plus tard sur le disconnect
   //ecoute poue les message venant de devtools.js
   var portListener = (message, sender, sendResponse) => {
-    console.log('[devtools-background.js] portConnection.onMessage:');
-    console.log(message);
+    Consolas.log('[devtools-background.js] portConnection.onMessage:');
+    Consolas.log(message);
     //on set le port pour cette connection pour pouvoir reparler avec a devtools.js
     connections[message.tabId] = portConnection;
     //on reparle a la devtools.js comme quoi on bien recu son message
@@ -102,10 +124,10 @@ chrome.runtime.onConnect.addListener(portConnection => {
 
 //check pour un refresh sur un chrome tab
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  console.log('[devtools-background.js] chrome.tabs.onUpdated:' + tabId);
+  Consolas.log('[devtools-background.js] chrome.tabs.onUpdated:' + tabId);
   //est-ce qu'il nous appratient
   if(typeof connections[tabId] !== 'undefined'){
-    console.log('[devtools-background.js] tab update:' + tabId);
+    Consolas.log('[devtools-background.js] tab update:' + tabId);
     //si le refresh le load est termine 
     if(changeInfo.status === 'loading'){
       connections[tabId].postMessage({
@@ -142,18 +164,18 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
 // les messages que l'on recoit de hooks.js on relai au devtools.js du tab associe
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log('[devtools-background.js] chrome.runtime.onMessage:');
-  console.log(message);
+  Consolas.log('[devtools-background.js] chrome.runtime.onMessage:');
+  Consolas.log(message);
   connections[sender.tab.id].postMessage(message);
   return true;
 });
 
 
 function onPanelShown(){
-  console.log('[devtools-background.js] onPanelShown');
+  Consolas.log('[devtools-background.js] onPanelShown');
 }
 
 function onPanelHidden(){
-  console.log('[devtools-background.js] onPanelHidden');
+  Consolas.log('[devtools-background.js] onPanelHidden');
 }
 

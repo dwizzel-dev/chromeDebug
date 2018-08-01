@@ -1,7 +1,7 @@
 
 // injected dans la content page que l'on inspect
 
-console.log('[backend.js] loaded');
+console.log('[D2CMedia Debug - backend.js] loaded');
 
 let Const = {
   LOAD: 0x301,
@@ -97,7 +97,7 @@ const PageAnalyser = {
 }
 
 // on envoie un message au hooks.js qui ecoute
-console.log('[backend.js] sending message to [hooks.js]');
+//console.log('[backend.js] sending message to [hooks.js]');
 
 if(typeof window.D2CMediaDebug !== "undefined"){
   
@@ -107,18 +107,14 @@ if(typeof window.D2CMediaDebug !== "undefined"){
     data: window.D2CMediaDebug
   }, '*');
 
-  let analysedData = PageAnalyser.getAll();
-
-  console.log(analysedData);
-  
   window.postMessage({
     source: Const.CONTENTNAME,
     command: Const.ANALYSED,
-    data: analysedData
+    data: PageAnalyser.getAll()
   }, '*');
  
 
 }else{
-  console.log('[backend.js] "window.D2CMediaDebug" Not Found')
+  //console.log('[D2CMedia Debug - backend.js] "window.D2CMediaDebug" Not Found')
 }
 

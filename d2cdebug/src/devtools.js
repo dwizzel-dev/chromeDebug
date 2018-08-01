@@ -2,8 +2,6 @@
 
 //import Const from './constant';
 
-console.log('[devtool.js] loaded');
-
 const Const = {
   INIT: 0x201,
   INJECT: 0x202,
@@ -36,6 +34,8 @@ const Consolas = {
       enabled: true,
   },
 };
+
+Consolas.log('[D2CMedia Debug - devtool.js] loaded');
 
 const PanelWriter = {
   scripts: [],
@@ -89,10 +89,15 @@ const PanelWriter = {
     }
     group = '';
     if(typeof data.group !== 'undefined' && data.group !== ''){
-      group = `<div class="group">${data.group}</div>`;
+      group = `<div class="group">Group: ${data.group}</div>`;
+    }
+    timer = '';
+    if(typeof data.timer !== 'undefined' && data.timer !== ''){
+      timer = `<div class="timer">Timer: ${data.timer}</div>`;
     }
     return `<div class="row type-${data.type}" id="${id}">
       <h2>
+        ${timer}
         ${group}
         <span class="classname">${data.from.class} :: </span>${data.from.method}
         <div class="file">${data.from.file} <span class="line">${data.from.line}</span></div>
@@ -236,8 +241,8 @@ function injectScript(scriptName, cb){
     (function() {
       var script = document.constructor.prototype.createElement.call(document, 'script');
       script.src = "${scriptName}";
-      console.log('[devtool.js] Injecting ${scriptName} script in content page');
-      console.log(script);
+      // console.log('[devtool.js] Injecting ${scriptName} script in content page');
+      // console.log(script);
       document.documentElement.appendChild(script);
       //script.parentNode.removeChild(script);
     })()

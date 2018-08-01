@@ -34,7 +34,7 @@ h2{
   background-color: #333;
   font-weight: normal;
   color: #86e1ff;
-  padding: 10px 5px;
+  padding: 10px;
   margin: 0;
   width: 100%;
 }
@@ -54,14 +54,17 @@ div.row.type-4 h2{
 div.row.type-5 h2{
   background-color: #795548;
 }
-h2 div.group{
+div.row.type-6 h2{ 
+  background-color: #4c5f68;
+}
+h2 div.group,
+h2 div.timer{
   font-weight: normal;
   font-size: 1.6rem;
   color: #fff;
   margin-bottom: 5px;
   text-transform: capitalize;
 }
-
 h2 div.file{
   color: #c0c0c0;
   font-weight: normal;
@@ -89,9 +92,11 @@ div.cell.code{
   font-size: 0.9em;
   margin: 0;
   width:100%;
+  padding: 0;
 }
 div.cell.code.treeview{
   font-size: inherit;
+  padding: 10px;
 }
 div.cell.filter{
   color: #888;
@@ -107,7 +112,7 @@ pre{
   white-space: pre-wrap !important;
   border: 0 !important;
   background: none !important;
-  padding: 0 !important;
+  padding: 20px !important;
   margin:0;
 }
 
