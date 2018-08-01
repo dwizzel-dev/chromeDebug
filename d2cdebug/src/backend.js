@@ -15,7 +15,7 @@ const PageAnalyser = {
     let nodes = document.querySelectorAll('h1');
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr.push(nodes[i].innerText.trim()); 
+        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
       }
     }
     return arr;
@@ -25,7 +25,7 @@ const PageAnalyser = {
     let nodes = document.querySelectorAll('h2');
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr.push(nodes[i].innerText.trim()); 
+        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
       }
     }
     return arr;
@@ -35,7 +35,7 @@ const PageAnalyser = {
     let nodes = document.querySelectorAll('h3');
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr.push(nodes[i].innerText.trim()); 
+        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
       }
     }
     return arr;
@@ -46,7 +46,7 @@ const PageAnalyser = {
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
         //suppose en avoir juste un seul
-        title = nodes[i].innerText.trim(); 
+        title = nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim(); 
       }
     }
     return title;  
@@ -60,7 +60,7 @@ const PageAnalyser = {
         let attr = nodes[i].attributes;
         if(attr !== null){
           for(let j=0; j<attr.length;j++){
-            meta[attr[j].name] = attr[j].value.trim();
+            meta[attr[j].name] = attr[j].value.replace(/(\r\n|\n|\r)/gm,"").trim();
           }
         }
         metas.push(meta);
