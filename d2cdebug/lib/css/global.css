@@ -23,7 +23,7 @@ div.content span.msg{
   color: #aaa;
 }
 div.row{
-  background-color: #333;
+  background-color: #000;
   margin: 0 0 20px 0;
   padding: 0;
   border-top: 1px solid #666;
@@ -37,9 +37,31 @@ h2{
   padding: 10px;
   margin: 0;
   width: 100%;
+  line-height: 28px;
 }
-h2 span.classname{
+h2 div.infos{
+  float: left;
+  width: 100%;
+}
+h2 div.infos span.classname{
   color: #07dcf7;
+  float:left;
+}
+h2 div.infos span.classname span.methodname{
+  color: #86e1ff;
+}
+h2 div.infos span.file{
+  color: #999;
+  font-weight: normal;
+  font-size: 0.75rem;
+  word-wrap: break-word;
+  margin: 0;
+  float: left;
+  clear: left;
+}
+h2 div.infos span.file span.line{
+  margin-left:5px;
+  font-weight: bold;
 }
 
 div.row.type-2 h2{
@@ -52,10 +74,10 @@ div.row.type-4 h2{
   background-color: #236e25;
 }
 div.row.type-5 h2{
-  background-color: #795548;
+  background-color: #4e372f;
 }
 div.row.type-6 h2{ 
-  background-color: #4c5f68;
+  background-color: #2f3f46;
 }
 h2 div.group,
 h2 div.timer{
@@ -65,23 +87,13 @@ h2 div.timer{
   margin-bottom: 5px;
   text-transform: capitalize;
 }
-h2 div.file{
-  color: #c0c0c0;
-  font-weight: normal;
-  padding: 5px 0;
-  font-size: 0.8rem;
-  word-wrap: break-word;
-  margin: 0;
-}
-h2 div.file span.line{
-  margin-left:10px;
-  font-weight: bold;
-}
+
 h2 div.comments{
-  font-weight: lighter;
+  /*font-weight: lighter;*/
   font-size: 0.8rem;
-  font-style: oblique;
   color: darkkhaki;  
+  float:left;
+  clear:both;
 }
 
 div.cell{
@@ -118,7 +130,18 @@ pre{
 
 .analysed-view h2{
   background-color: #333;
-  color: #4CAF50;
+  color: #8BC34A;
   border-top: 1px solid #666;
   padding:10px;
+  font-size: 1.25rem;
+  line-height: inherit;
+}
+
+
+/* line wrappers */
+@media only screen and (min-width: 960px) {
+	h2 div.infos span.file{
+    float: right;
+    clear: none;
+  }
 }

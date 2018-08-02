@@ -1,80 +1,87 @@
 <html>
-	<meta name="description" content="this is the meta description" />
-	<meta name="title" content="this is the meta title" />
-	<title>this is the page title</title>
-	<body>
-		<h1>this is a h1 tag</h1>
-		<h2>this is a h2 tag</h2>
-		<h3>this is a h3 number 1</h3>
-		<h3>this is a h3 number 2</h3>
-	</body>
-	<script>
-		const Family = {
-			init: (() => console.log(`I'm called on load`))(),
-			async letsAllGoToSleep(){
-				console.log(`-- Lets All Go To Sleep!`);
-				const olivier = this.goToSleep('Olivier', 6000).then( result => { 
-					console.log(`-- good morning ${result}!`);
-				});
-				const marieve = this.goToSleep('Marie-Eve', 1000).then( result => { 
-					console.log(`-- ${result} need coffee!`);
-				});
-				const zedrik = this.goToSleep('Zedrik', 3000).
-					then( async result => { 
-						console.log(`-- the dog is hungry ${result}!`);
-						return await this.feedTheDog('Ichigo');
-						})
-					.then( result => { 
-						console.log(`-- ${result} is a good dog!`);
-					});	
-				await olivier;
-				await marieve;
-				await zedrik;
-				return this;
-			},
-			goToSleep(data, msec){
-				console.log(`-- ${data} is going to sleep!`);
-				return new Promise( (resolve, reject) => {
-					setTimeout((resolver, sleeper) => {
-						console.log(`-- ${sleeper} is waking up!`);
-						resolver(sleeper);		
-					}, msec, resolve, data);
-				});
-			},
-			async feedTheDog(data){
-				console.log(`-- lets feed ${data}`);
-				return this.theDogEats(data, 3000);		
-			},
-			theDogEats(data, msec){
-				console.log(`-- ${data} is eating!`);
-				return new Promise( (resolve, reject) => {
-					setTimeout((resolver, dog) => {
-						console.log(`-- ${dog} has finished is plate!`);
-						resolver(dog);		
-					}, msec, resolve, data);
-				});
-			},
-			letsEat(){
-				console.log(`-- lets Eat`);
-				return 'Yeah!';
-			}
-		};
-		
-		Family
-			.letsAllGoToSleep()
-			.then( self => {
-				console.log(`-- We are all awaked now and the dog is feeded!`);
-				return self.letsEat();
-				})
-			.then(result => {
-				console.log(`${result}`);
+<meta name="description" content="this is the meta description" />
+<meta name="title" content="this is the meta title" />
+<title>this is the page title</title>
+<style>
+	body{
+		background: #000;
+		color:#888;
+	}
+</style>
+<body>
+	<h1>this is a h1 tag</h1>
+	<h2>this is a h2 tag</h2>
+	<h3>this is a h3 number 1</h3>
+	<h3>this is a h3 number 2</h3>
+</body>
+<script>
+	const Family = {
+		init: (() => console.log(`I'm called on load`))(),
+		async letsAllGoToSleep() {
+			console.log(`-- Lets All Go To Sleep!`);
+			const olivier = this.goToSleep('Olivier', 6000).then(result => {
+				console.log(`-- good morning ${result}!`);
 			});
-		
+			const marieve = this.goToSleep('Marie-Eve', 1000).then(result => {
+				console.log(`-- ${result} need coffee!`);
+			});
+			const zedrik = this.goToSleep('Zedrik', 3000).
+				then(async result => {
+					console.log(`-- the dog is hungry ${result}!`);
+					return await this.feedTheDog('Ichigo');
+				})
+				.then(result => {
+					console.log(`-- ${result} is a good dog!`);
+				});
+			await olivier;
+			await marieve;
+			await zedrik;
+			return this;
+		},
+		goToSleep(data, msec) {
+			console.log(`-- ${data} is going to sleep!`);
+			return new Promise((resolve, reject) => {
+				setTimeout((resolver, sleeper) => {
+					console.log(`-- ${sleeper} is waking up!`);
+					resolver(sleeper);
+				}, msec, resolve, data);
+			});
+		},
+		async feedTheDog(data) {
+			console.log(`-- lets feed ${data}`);
+			return this.theDogEats(data, 3000);
+		},
+		theDogEats(data, msec) {
+			console.log(`-- ${data} is eating!`);
+			return new Promise((resolve, reject) => {
+				setTimeout((resolver, dog) => {
+					console.log(`-- ${dog} has finished is plate!`);
+					resolver(dog);
+				}, msec, resolve, data);
+			});
+		},
+		letsEat() {
+			console.log(`-- lets Eat`);
+			return 'Yeah!';
+		}
+	};
 
-	</script>
+	Family
+		.letsAllGoToSleep()
+		.then(self => {
+			console.log(`-- We are all awaked now and the dog is feeded!`);
+			return self.letsEat();
+		})
+		.then(result => {
+			console.log(`${result}`);
+		});
+
+
+</script>
+
 </html>
 <d2cmediadebug>
 	<script>
-	window.D2CMediaDebug = [{"from":{"method":"loadPageFile","class":"CPreProcessor","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php","line":"2641"},"obj":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/cardetail.html","type":"1","filter":"olivier@d2cmedia.ca","comments":""},{"from":{"method":"processPage","class":"CPreProcessor","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php","line":"678"},"obj":"{$MAKE} {$MODEL} {$YEAR}{$VERSION} \u00e0 vendre chez {$DEALER}! Excellente condition, \u00e0 prix ultra comp\u00e9titif!","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $this->metaUsedOgTitle replacing $FBMETATITLE"},{"from":{"method":"processPage","class":"CPreProcessor","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php","line":"682"},"obj":"{$MAKE} {$MODEL} {$YEAR} au meilleur prix chez {$DEALER}!","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $this->metaUsedOgDesc replacing $FBMETADESC"},{"from":{"method":"processDetailPage","class":"clsUsedCarSearchLoader","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php","line":"2070"},"obj":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/js\/json\/7117739.json","type":"1","filter":"olivier@d2cmedia.ca","comments":"the json file $filePath"},{"from":{"method":"getHtmlForSimilarsCarousel","class":"clsUsedCarSearchLoader","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php","line":"2341"},"obj":[{"vehicleid":"7114888","no_stock":"T46272A","make":"Toyota","model":"Corolla","miles":"98362","price":"13900","negociable":"0","year":"2015","owner":"368","primaryThumbnail":"\/\/www.autoaubaine.com\/dealer\/368\/7114888\/mini-1.jpg","similarToVehicleID":"7117739","odometre_type":"1"},{"vehicleid":"7078773","no_stock":"T45942Z","make":"Toyota","model":"Corolla","miles":"47283","price":"14250","negociable":"0","year":"2015","owner":"368","primaryThumbnail":"\/\/www.autoaubaine.com\/dealer\/368\/7078773\/mini-1.jpg","similarToVehicleID":"7117739","odometre_type":"1"},{"vehicleid":"7093412","no_stock":"T46191Z","make":"Toyota","model":"Corolla","miles":"39600","price":"14250","negociable":"0","year":"2015","owner":"368","primaryThumbnail":"\/\/www.autoaubaine.com\/dealer\/368\/7093412\/mini-1.jpg","similarToVehicleID":"7117739","odometre_type":"1"},{"vehicleid":"7069394","no_stock":"T46046Z","make":"Toyota","model":"Corolla","miles":"72419","price":"14490","negociable":"0","year":"2015","owner":"368","primaryThumbnail":"\/\/www.autoaubaine.com\/dealer\/368\/7069394\/mini-1.jpg","similarToVehicleID":"7117739","odometre_type":"1"},{"vehicleid":"7100865","no_stock":"T46201A","make":"Toyota","model":"Corolla","miles":"61341","price":"14900","negociable":"0","year":"2015","owner":"368","primaryThumbnail":"\/\/www.autoaubaine.com\/dealer\/368\/7100865\/mini-1.jpg","similarToVehicleID":"7117739","odometre_type":"1"}],"type":"1","filter":"olivier@d2cmedia.ca","comments":"the similars $vehicles carousel array json"},{"from":{"method":"processDetailText","class":"clsUsedCarHTML","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php","line":"2841"},"obj":"","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $calculatorDIV2"},{"from":{"method":"processDetailText","class":"clsUsedCarHTML","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php","line":"2845"},"obj":"<div class=\"\" ><div data-carid=\"7117739\"><h2 class=\"\" id=\"carPrice\">14,900$<\/h2><div class=\"-fs15\">(66,910 km)<\/div><\/div><\/div>","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $priceKMHtml"},{"from":{"method":"processDetailText","class":"clsUsedCarHTML","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php","line":"2849"},"obj":"<h1  class=\"default \"><i class=\"fa fa-chevron-right icon multiLineH1\"  aria-hidden=\"true\"><\/i><div ><div class=\"makeModelYear\">Scion tC A\/C, Bluetooth, Prise AUX\/USB, Lecteur C 2015 <\/div><div class=\"dealerLcationCarTitle\">\u00e0 Montr\u00e9al (pr\u00e8s de Repentigny et Laval) <\/div><\/div><\/h1>","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $htmlH1Div"},{"from":{"method":"processDetailText","class":"clsUsedCarHTML","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php","line":"2853"},"obj":"","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $soldCarNoteBlock"},{"from":{"method":"processDetailPage","class":"clsUsedCarSearchLoader","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php","line":"2122"},"obj":"<ul num-vehicles=\"5\"><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7114888.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img2.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7114888\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$13,900<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7078773.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img1.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7078773\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,250<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7093412.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img3.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7093412\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,250<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7069394.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img3.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7069394\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,490<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7100865.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img1.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7100865\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,900<\/span><\/a><\/div><\/li><\/ul>","type":"1","filter":"olivier@d2cmedia.ca","comments":"the $similarsCarouselHTML"},{"from":{"method":"processDetailText","class":"clsUsedCarHTML","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php","line":"1342"},"obj":["Scion tC A\/C, Bluetooth, Prise AUX\/USB, Lecteur C 2015","\u00e0 Montr\u00e9al (pr\u00e8s de Repentigny et Laval)"],"type":"5","filter":"olivier@d2cmedia.ca","group":"H1 titles","comments":""},{"from":{"method":"","class":"","file":"\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessor.php","line":"350"},"obj":{"start":"1533164794.4577","end":"1533164794.5097","diff":"0.051996946334839"},"type":"6","filter":"olivier@d2cmedia.ca","timer":"site","comments":"timing the php time to compile the page from start to end"}];
+		window.D2CMediaDebug = [{ "from": { "method": "loadPageFile", "class": "CPreProcessor", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php", "line": "2641" }, "obj": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/cardetail.html", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "" }, { "from": { "method": "processPage", "class": "CPreProcessor", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php", "line": "678" }, "obj": "{$MAKE} {$MODEL} {$YEAR}{$VERSION} \u00e0 vendre chez {$DEALER}! Excellente condition, \u00e0 prix ultra comp\u00e9titif!", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $this->metaUsedOgTitle replacing $FBMETATITLE" }, { "from": { "method": "processPage", "class": "CPreProcessor", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorClass.php", "line": "682" }, "obj": "{$MAKE} {$MODEL} {$YEAR} au meilleur prix chez {$DEALER}!", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $this->metaUsedOgDesc replacing $FBMETADESC" }, { "from": { "method": "processDetailPage", "class": "clsUsedCarSearchLoader", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php", "line": "2070" }, "obj": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/js\/json\/7117739.json", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the json file $filePath" }, { "from": { "method": "getHtmlForSimilarsCarousel", "class": "clsUsedCarSearchLoader", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php", "line": "2341" }, "obj": [{ "vehicleid": "7114888", "no_stock": "T46272A", "make": "Toyota", "model": "Corolla", "miles": "98362", "price": "13900", "negociable": "0", "year": "2015", "owner": "368", "primaryThumbnail": "\/\/www.autoaubaine.com\/dealer\/368\/7114888\/mini-1.jpg", "similarToVehicleID": "7117739", "odometre_type": "1" }, { "vehicleid": "7078773", "no_stock": "T45942Z", "make": "Toyota", "model": "Corolla", "miles": "47283", "price": "14250", "negociable": "0", "year": "2015", "owner": "368", "primaryThumbnail": "\/\/www.autoaubaine.com\/dealer\/368\/7078773\/mini-1.jpg", "similarToVehicleID": "7117739", "odometre_type": "1" }, { "vehicleid": "7093412", "no_stock": "T46191Z", "make": "Toyota", "model": "Corolla", "miles": "39600", "price": "14250", "negociable": "0", "year": "2015", "owner": "368", "primaryThumbnail": "\/\/www.autoaubaine.com\/dealer\/368\/7093412\/mini-1.jpg", "similarToVehicleID": "7117739", "odometre_type": "1" }, { "vehicleid": "7069394", "no_stock": "T46046Z", "make": "Toyota", "model": "Corolla", "miles": "72419", "price": "14490", "negociable": "0", "year": "2015", "owner": "368", "primaryThumbnail": "\/\/www.autoaubaine.com\/dealer\/368\/7069394\/mini-1.jpg", "similarToVehicleID": "7117739", "odometre_type": "1" }, { "vehicleid": "7100865", "no_stock": "T46201A", "make": "Toyota", "model": "Corolla", "miles": "61341", "price": "14900", "negociable": "0", "year": "2015", "owner": "368", "primaryThumbnail": "\/\/www.autoaubaine.com\/dealer\/368\/7100865\/mini-1.jpg", "similarToVehicleID": "7117739", "odometre_type": "1" }], "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the similars $vehicles carousel array json" }, { "from": { "method": "processDetailText", "class": "clsUsedCarHTML", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php", "line": "2841" }, "obj": "", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $calculatorDIV2" }, { "from": { "method": "processDetailText", "class": "clsUsedCarHTML", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php", "line": "2845" }, "obj": "<div class=\"\" ><div data-carid=\"7117739\"><h2 class=\"\" id=\"carPrice\">14,900$<\/h2><div class=\"-fs15\">(66,910 km)<\/div><\/div><\/div>", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $priceKMHtml" }, { "from": { "method": "processDetailText", "class": "clsUsedCarHTML", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php", "line": "2849" }, "obj": "<h1  class=\"default \"><i class=\"fa fa-chevron-right icon multiLineH1\"  aria-hidden=\"true\"><\/i><div ><div class=\"makeModelYear\">Scion tC A\/C, Bluetooth, Prise AUX\/USB, Lecteur C 2015 <\/div><div class=\"dealerLcationCarTitle\">\u00e0 Montr\u00e9al (pr\u00e8s de Repentigny et Laval) <\/div><\/div><\/h1>", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $htmlH1Div" }, { "from": { "method": "processDetailText", "class": "clsUsedCarHTML", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php", "line": "2853" }, "obj": "", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $soldCarNoteBlock" }, { "from": { "method": "processDetailPage", "class": "clsUsedCarSearchLoader", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCars.php", "line": "2122" }, "obj": "<ul num-vehicles=\"5\"><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7114888.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img2.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7114888\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$13,900<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7078773.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img1.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7078773\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,250<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7093412.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img3.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7093412\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,250<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7069394.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img3.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7069394\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,490<\/span><\/a><\/div><\/li><li><div class=\"wboxes\"><a href=\"\/occasion\/Toyota-Corolla-2015-id7100865.html\" rel=\"nofollow\" title=\"Toyota Corolla 2015\"><span class=\"wimage\"><img src=\"https:\/\/img1.d2cmedia.ca\/cb5b62060775a4b\/\/368\/7100865\/1\/M\/Toyota-Corolla-2015.jpg\" alt=\"Toyota Corolla 2015\"><\/span><span class=\"wmake\">Toyota<\/span><span class=\"wmodel\">Corolla<\/span><span class=\"wprice \">$14,900<\/span><\/a><\/div><\/li><\/ul>", "type": "1", "filter": "olivier@d2cmedia.ca", "comments": "the $similarsCarouselHTML" }, { "from": { "method": "processDetailText", "class": "clsUsedCarHTML", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessorUsedCarsHTML.php", "line": "1342" }, "obj": ["Scion tC A\/C, Bluetooth, Prise AUX\/USB, Lecteur C 2015", "\u00e0 Montr\u00e9al (pr\u00e8s de Repentigny et Laval)"], "type": "5", "filter": "olivier@d2cmedia.ca", "group": "H1 titles", "comments": "" }, { "from": { "method": "", "class": "", "file": "\/home\/olivier\/siteEngine\/renderedSites\/1\/79\/fr\/php\/preProcessor.php", "line": "350" }, "obj": { "start": "1533164794.4577", "end": "1533164794.5097", "diff": "0.051996946334839" }, "type": "6", "filter": "olivier@d2cmedia.ca", "timer": "site", "comments": "timing the php time to compile the page from start to end" }];
 	</script>
-	</d2cmediadebug>
+</d2cmediadebug>

@@ -10,9 +10,9 @@ let Const = {
 };
 
 const PageAnalyser = {
-  getH1(){
+  getTag(tag){
     let arr = [];
-    let nodes = document.querySelectorAll('h1');
+    let nodes = document.querySelectorAll(tag);
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
         arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
@@ -20,22 +20,12 @@ const PageAnalyser = {
     }
     return arr;
   },
-  getH2(){
-    let arr = [];
-    let nodes = document.querySelectorAll('h2');
+  getInput(type){
+    let arr = {};
+    let nodes = document.querySelectorAll(`input[type="${type}"]`);
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
-      }
-    }
-    return arr;
-  },
-  getH3(){
-    let arr = [];
-    let nodes = document.querySelectorAll('h3');
-    if(nodes !== null){
-      for(let i=0; i<nodes.length;i++){
-        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
+        arr[nodes[i].name] = nodes[i].value.replace(/(\r\n|\n|\r)/gm,"").trim();
       }
     }
     return arr;
@@ -89,9 +79,10 @@ const PageAnalyser = {
     return {
       title: this.getTitle(),
       meta: this.getMeta(),
-      h1: this.getH1(),
-      h2: this.getH2(),
-      h3: this.getH3(),
+      h1: this.getTag('h1'),
+      h2: this.getTag('h2'),
+      h3: this.getTag('h3'),
+      hidden: this.getInput('hidden'),
     }
   },
 }

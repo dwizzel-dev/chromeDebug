@@ -47,7 +47,10 @@ const PanelWriter = {
         output.innerHTML = ``;  
       }else{
         output.innerHTML = `<div class="content"><h2>SEO Basics</h2><div class="cell code"></div></div>`;
-        $(`.analysed-view .code`).jsonView(data);
+        //json viewer and style
+        $(`.analysed-view .code`).addClass('treeview').jsonView(data);
+        //on collapse celui-ci au premier niveau uniquement
+        $(`.analysed-view .treeview .collapser`).trigger('click');
       }
     }
   },
@@ -70,7 +73,7 @@ const PanelWriter = {
   prettyCode(){
     //indente le code si il y a lieu
     $(`pre`).each(function(index){
-      $(this).text(formatFactory(($(this).text())));
+      $(this).text(indentCode(($(this).text())));
     });
     //prettyfier , mais il va le faire sur les test standard aussi, 
     prettyPrint();
@@ -82,25 +85,27 @@ const PanelWriter = {
     }
   },
   wrtRow(id, data){
-    //comments et groupes stack
-    comments = '';
-    if(typeof data.comments !== 'undefined' && data.comments !== ''){
-      comments = `<div class="comments">${data.comments}</div>`;
-    }
-    group = '';
-    if(typeof data.group !== 'undefined' && data.group !== ''){
-      group = `<div class="group">Group: ${data.group}</div>`;
-    }
-    timer = '';
-    if(typeof data.timer !== 'undefined' && data.timer !== ''){
-      timer = `<div class="timer">Timer: ${data.timer}</div>`;
-    }
+    //comments, groupes stack, et timer stack
+    let comments = (typeof data.comments !== 'undefined' && data.comments !== '') ? 
+        `<div class="comments">${data.comments}</div>` : '';
+    let group = (typeof data.group !== 'undefined' && data.group !== '') ? 
+        `<div class="group">Group: ${data.group}</div>` : '';
+    let timer = (typeof data.timer !== 'undefined' && data.timer !== '') ? 
+        `<div class="timer">Timer: ${data.timer}</div>` : '';
+    //class method peut etre vide des fois
+    let fromClass = (data.from.class == 'null' || data.from.class == '') ? 
+        'Global' : data.from.class;
+    let fromMethod = (data.from.method == 'null' || data.from.method == '') ? 
+        'Global' : data.from.method;
+    //
     return `<div class="row type-${data.type}" id="${id}">
       <h2>
         ${timer}
         ${group}
-        <span class="classname">${data.from.class} :: </span>${data.from.method}
-        <div class="file">${data.from.file} <span class="line">${data.from.line}</span></div>
+        <div class="infos">
+          <span class="classname">${fromClass} :: <span class="methodname">${fromMethod}</span></span>
+          <span class="file">${data.from.file} <span class="line">${data.from.line}</span></span>
+        </div>  
         ${comments}
       </h2>  
       <div class="cell code">${this.wrtObj(id, data.obj)}</div>
@@ -256,46 +261,4 @@ function injectScript(scriptName, cb){
 }
 
 
-function formatFactory(html) {
-  function parse(html, tab = 0) {
-      var tab;
-      var html = $.parseHTML(html);
-      var formatHtml = new String();   
 
-      function setTabs () {
-          var tabs = new String();
-
-          for (i=0; i < tab; i++){
-            tabs += '  '; // double space car un tab est trop gros
-          }
-          return tabs;    
-      };
-
-
-      $.each( html, function( i, el ) {
-          if (el.nodeName == '#text') {
-              if (($(el).text().trim()).length) {
-                  formatHtml += setTabs() + $(el).text().trim() + '\n';
-              }    
-          } else {
-              var innerHTML = $(el).html().trim();
-              $(el).html(innerHTML.replace('\n', '').replace(/ +(?= )/g, ''));
-              
-
-              if ($(el).children().length) {
-                  $(el).html('\n' + parse(innerHTML, (tab + 1)) + setTabs());
-                  var outerHTML = $(el).prop('outerHTML').trim();
-                  formatHtml += setTabs() + outerHTML + '\n'; 
-
-              } else {
-                  var outerHTML = $(el).prop('outerHTML').trim();
-                  formatHtml += setTabs() + outerHTML + '\n';
-              }      
-          }
-      });
-
-      return formatHtml;
-  };   
-  
-  return parse(html.replace(/(\r\n|\n|\r)/gm," ").replace(/ +(?= )/g,''));
-}; 
