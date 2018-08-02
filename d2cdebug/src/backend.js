@@ -3,11 +3,9 @@
 
 console.log('[D2CMedia Debug - backend.js] loaded');
 
-let Const = {
-  LOAD: 0x301,
-  ANALYSED: 0x401,
-  CONTENTNAME: 'd2cmedia-devtool-content'
-};
+import Const from '/src/shared/constant.js';
+import Consolas from '/src/shared/consolas.js';
+
 
 const PageAnalyser = {
   getTag(tag){
@@ -88,7 +86,7 @@ const PageAnalyser = {
 }
 
 // on envoie un message au hooks.js qui ecoute
-//console.log('[backend.js] sending message to [hooks.js]');
+Consolas.log('[backend.js] sending message to [hooks.js]');
 
 if(typeof window.D2CMediaDebug !== "undefined"){
   
@@ -103,9 +101,21 @@ if(typeof window.D2CMediaDebug !== "undefined"){
     command: Const.ANALYSED,
     data: PageAnalyser.getAll()
   }, '*');
+
+  //send a message to the devtool-background.js from the javascript in the content-page via the hook.js
+  window.CommRouter = {
+    send(data){
+      window.postMessage({
+        source: Const.CONTENTNAME,
+        command: Const.EXTERNDATA,
+        data: data
+      }, '*');
+    }
+
+  }
  
 
 }else{
-  //console.log('[D2CMedia Debug - backend.js] "window.D2CMediaDebug" Not Found')
+  Consolas.log('[D2CMedia Debug - backend.js] "window.D2CMediaDebug" Not Found')
 }
 

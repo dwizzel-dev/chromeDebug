@@ -56,7 +56,7 @@ bgPageConnection.onMessage.addListener(message => {
     }else if(message.name == Const.CONTENTNAME){
       switch(message.command){
         case Const.ONDATA:
-          Consolas.log('[devtool.js] writing to panel');
+          Consolas.log('[devtool.js] ONDATA');
           if(message.data.length === 0){
             PanelWriter.wrt(Const.EMPTY);
           }else{
@@ -64,13 +64,17 @@ bgPageConnection.onMessage.addListener(message => {
           }
           break;
         case Const.ONANALYSED:
-          Consolas.log('[devtool.js] analyse to panel');
+          Consolas.log('[devtool.js] ONANALYSED');
           if(message.data.length === 0){
             PanelWriter.wrtAnalyzed(Const.CLEAR);
           }else{
             PanelWriter.wrtAnalyzed(message.data);
           }
           break;  
+        case Const.ONEXTERNDATA:
+          Consolas.log('[devtool.js] ONEXTERNDATA');
+          Consolas.log(message.data);
+          break;    
         default:
           break;  
       } 
@@ -96,8 +100,14 @@ bgPageConnection.postMessage({
 function injectScript(scriptName, cb){
   const src = `
     (function() {
-      var script = document.constructor.prototype.createElement.call(document, 'script');
-      script.src = "${scriptName}";
+
+      //ceci est mieux et plus actuel
+      const script = document.createElement('script');
+      script.setAttribute("type", "module");
+      script.setAttribute("src", "${scriptName}");
+      // var script = document.constructor.prototype.createElement.call(document, 'script');
+      // script.src = "${scriptName}";
+      // script.type = "module";
       // console.log('[devtool.js] Injecting ${scriptName} script in content page');
       // console.log(script);
       document.documentElement.appendChild(script);

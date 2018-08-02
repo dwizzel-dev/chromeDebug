@@ -128,7 +128,8 @@ pre{
   margin:0;
 }
 
-.analysed-view h2{
+.analysed-view h2,
+.externdata-view h2{
   background-color: #333;
   color: #8BC34A;
   border-top: 1px solid #666;
@@ -136,7 +137,6 @@ pre{
   font-size: 1.25rem;
   line-height: inherit;
 }
-
 
 /* line wrappers */
 @media only screen and (min-width: 960px) {

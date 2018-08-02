@@ -8,7 +8,8 @@
     "devtools.html",
     "background.html",
     "src/backend.js",
-    "lib/jquery/3.3.1/jquery.min.js"
+    "src/shared/constant.js",
+    "src/shared/consolas.js"
   ],
   "background": {
     "scripts": [
@@ -32,15 +33,16 @@
         "https://*/*"
       ],
       "js": [
-        "src/hooks.js"
+        "src/hook.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
   "permissions": [
     "http://*/*",
     "https://*/*",
     "file:///*",
+    "*://*/*",
     "contextMenus",
     "declarativeContent"
   ]

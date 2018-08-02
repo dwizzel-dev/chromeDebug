@@ -15,23 +15,36 @@
 	<h3>this is a h3 number 2</h3>
 </body>
 <script>
+
+	function sendMessageToDevtool(msg){
+		//le comm Router vient du backend.js -> hook.js injecte dans la page
+		//celui-ci peut communiquer avec le devtool-background
+		if(typeof CommRouter !== 'undefined'){
+			console.log(msg);
+			CommRouter.send(msg);
+		}else{
+			console.log('CommRouter is undefined');
+		}
+	}
+
+
 	const Family = {
-		init: (() => console.log(`I'm called on load`))(),
+		init: (() => sendMessageToDevtool(`I'm called on load`))(),
 		async letsAllGoToSleep() {
-			console.log(`-- Lets All Go To Sleep!`);
-			const olivier = this.goToSleep('Olivier', 6000).then(result => {
-				console.log(`-- good morning ${result}!`);
+			sendMessageToDevtool(`-- Lets All Go To Sleep!`);
+			const olivier = this.goToSleep('Olivier', 10000).then(result => {
+				sendMessageToDevtool(`-- good morning ${result}!`);
 			});
-			const marieve = this.goToSleep('Marie-Eve', 1000).then(result => {
-				console.log(`-- ${result} need coffee!`);
+			const marieve = this.goToSleep('Marie-Eve', 5000).then(result => {
+				sendMessageToDevtool(`-- ${result} need coffee!`);
 			});
-			const zedrik = this.goToSleep('Zedrik', 3000).
+			const zedrik = this.goToSleep('Zedrik', 8000).
 				then(async result => {
-					console.log(`-- the dog is hungry ${result}!`);
+					sendMessageToDevtool(`-- the dog is hungry ${result}!`);
 					return await this.feedTheDog('Ichigo');
 				})
 				.then(result => {
-					console.log(`-- ${result} is a good dog!`);
+					sendMessageToDevtool(`-- ${result} is a good dog!`);
 				});
 			await olivier;
 			await marieve;
@@ -39,42 +52,44 @@
 			return this;
 		},
 		goToSleep(data, msec) {
-			console.log(`-- ${data} is going to sleep!`);
+			sendMessageToDevtool(`-- ${data} is going to sleep!`);
 			return new Promise((resolve, reject) => {
 				setTimeout((resolver, sleeper) => {
-					console.log(`-- ${sleeper} is waking up!`);
+					sendMessageToDevtool(`-- ${sleeper} is waking up!`);
 					resolver(sleeper);
 				}, msec, resolve, data);
 			});
 		},
 		async feedTheDog(data) {
-			console.log(`-- lets feed ${data}`);
+			sendMessageToDevtool(`-- lets feed ${data}`);
 			return this.theDogEats(data, 3000);
 		},
 		theDogEats(data, msec) {
-			console.log(`-- ${data} is eating!`);
+			sendMessageToDevtool(`-- ${data} is eating!`);
 			return new Promise((resolve, reject) => {
 				setTimeout((resolver, dog) => {
-					console.log(`-- ${dog} has finished is plate!`);
+					sendMessageToDevtool(`-- ${dog} has finished is plate!`);
 					resolver(dog);
 				}, msec, resolve, data);
 			});
 		},
 		letsEat() {
-			console.log(`-- lets Eat`);
+			sendMessageToDevtool(`-- lets Eat`);
 			return 'Yeah!';
 		}
 	};
 
+
 	Family
 		.letsAllGoToSleep()
 		.then(self => {
-			console.log(`-- We are all awaked now and the dog is feeded!`);
+			sendMessageToDevtool(`-- We are all awaked now and the dog is feeded!`);
 			return self.letsEat();
 		})
 		.then(result => {
-			console.log(`${result}`);
+			sendMessageToDevtool(`${result}`);
 		});
+
 
 
 </script>

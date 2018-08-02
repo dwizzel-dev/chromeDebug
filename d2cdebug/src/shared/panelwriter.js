@@ -58,9 +58,9 @@ const PanelWriter = {
     let timer = (typeof data.timer !== 'undefined' && data.timer !== '') ? 
         `<div class="timer">Timer: ${data.timer}</div>` : '';
     //class method peut etre vide des fois
-    let fromClass = (data.from.class == 'null' || data.from.class == '') ? 
+    let fromClass = (data.from.class == null || data.from.class == '') ? 
         'Global' : data.from.class;
-    let fromMethod = (data.from.method == 'null' || data.from.method == '') ? 
+    let fromMethod = (data.from.method == null || data.from.method == '') ? 
         'Global' : data.from.method;
     //
     return `<div class="row type-${data.type}" id="${id}">
