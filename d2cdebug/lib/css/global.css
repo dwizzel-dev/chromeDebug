@@ -115,6 +115,56 @@ div.cell.filter{
   font-size: 0.8em;
 }
 
+
+/* timers*/
+div.row.timer h2{
+  font-size: 1.3rem;
+}
+div.row.timer h3{
+  font-size: 1.0rem;
+  background-color: #ccc;
+  width: 100%;
+  padding: 10px;
+  float: left;
+  margin: 0;
+  text-transform: capitalize;
+}
+div.row.timer div.cell{
+  width: 100%;
+  background-color: #263238;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: lighter;
+  padding: 10px;
+}
+
+div.row.timer div.line{
+  float:left;
+  clear:both;
+}
+div.row.timer div.line.method{
+  font-size: 1rem;
+  color: #80deea;
+}
+div.row.timer div.line.file{
+  font-size: 0.7rem;
+  color: #999;
+}
+div.row.timer div.line.comments{
+  font-size: 0.8rem;
+  color: darkkhaki;
+  padding: 5px 0px;
+}
+div.row.timer div.line.diff {
+  font-size: 1.1rem;
+  padding: 10px 0;
+}
+div.row.timer div.line.filter {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+
 xmp{
   white-space: normal;
   word-wrap: break-word;

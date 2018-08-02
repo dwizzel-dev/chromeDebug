@@ -5,6 +5,36 @@ import Consolas from '/src/shared/consolas.js';
 const PanelWriter = {
   scripts: [],
   wrtMsg: data => `<span class="msg">${data}</span>`,
+  wrtTimers(data){
+    let innerContent = `
+      <div class="row timer type-6">
+      <h2>Timers</h2>
+      `;
+    //loop dans tout les timers
+    for(let o in data){
+      //class method peut etre vide des fois
+      let fromClass = (data[o].from.class == null || data[o].from.class == '') ? 
+          'Global' : data[o].from.class;
+      let fromMethod = (data[o].from.method == null || data[o].from.method == '') ? 
+          'Global' : data[o].from.method;
+      innerContent += `
+      <h3>${o}</h3>  
+        <div class="cell">
+          <div class="line method">
+            ${fromClass} :: ${fromMethod}
+          </div>  
+          <div class="line file">  
+            ${data[o].from.file} ${data[o].from.line}
+          </div>  
+          <div class="line comments">${data[o].comments}</div>
+          <div class="line diff">${data[o].diff} seconds</div>
+          <div class="line filter">filter: ${data[o].filter}</div>
+        </div>
+      `;
+    }
+    innerContent += `</div>`;
+    return innerContent;
+  },
   wrtAnalyzed(data){
     const output = document.querySelector('.analysed-view');
     if(typeof output !== 'undefined'){
@@ -63,18 +93,19 @@ const PanelWriter = {
     let fromMethod = (data.from.method == null || data.from.method == '') ? 
         'Global' : data.from.method;
     //
-    return `<div class="row type-${data.type}" id="${id}">
-      <h2>
-        ${timer}
-        ${group}
-        <div class="infos">
-          <span class="classname">${fromClass} :: <span class="methodname">${fromMethod}</span></span>
-          <span class="file">${data.from.file} <span class="line">${data.from.line}</span></span>
-        </div>  
-        ${comments}
-      </h2>  
-      <div class="cell code">${this.wrtObj(id, data.obj)}</div>
-      <div class="cell filter">Filter: ${data.filter}</div>
+    return `
+      <div class="row type-${data.type}" id="${id}">
+        <h2>
+          ${timer}
+          ${group}
+          <div class="infos">
+            <span class="classname">${fromClass} :: <span class="methodname">${fromMethod}</span></span>
+            <span class="file">${data.from.file} <span class="line">${data.from.line}</span></span>
+          </div>  
+          ${comments}
+        </h2>  
+        <div class="cell code">${this.wrtObj(id, data.obj)}</div>
+        <div class="cell filter">Filter: ${data.filter}</div>
       </div>`;
   },
   wrtObj(id, data){
@@ -109,7 +140,11 @@ const PanelWriter = {
       default:
         let cmpt = 0;
         for(let k in data){
-          content += this.wrtRow(`treeView-${cmpt++}`, data[k]);
+          if(k === Const.DATAKEYTIMER){
+            content += this.wrtTimers(data[k]);  
+          }else{
+            content += this.wrtRow(`treeView-${cmpt++}`, data[k]);
+          } 
         }
         break;  
     }

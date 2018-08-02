@@ -18,6 +18,9 @@ const Const = {
   ONDATA: 0x401,
   ONANALYSED: 0x402,
   ONEXTERNDATA: 0x403,
+
+  //specific key name or text
+  DATAKEYTIMER: 'timer',
     
   //devtool name for post message filtering
   TOOLNAME: 'd2cmedia-devtool-inspector',
