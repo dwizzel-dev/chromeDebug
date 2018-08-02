@@ -1,39 +1,7 @@
 // ce script est caller quand le panel est active
 
-//import Const from './constant';
-
-const Const = {
-  INIT: 0x201,
-  INJECT: 0x202,
-  CLEAR: 0x203,
-  LOADING: 0x204,
-  EMPTY: 0x205,
-  ONDATA: 0x302,
-  ONANALYSED: 0x303,
-  TOOLNAME: 'd2cmedia-devtool-inspector',
-  CONTENTNAME: 'd2cmedia-devtool-content'
-};
-
-const Consolas = {
-  log: function(data){
-    if(this.options.enabled){
-      console.log(data);
-    }
-  },
-  warn: function(data){
-    if(this.options.enabled){
-      console.warn(data);
-    }
-  },
-  error: function(data){
-    if(this.options.enabled){
-      console.error(data);
-    }
-  },
-  options: {
-      enabled: true,
-  },
-};
+import Const from '/src/shared/constant.js';
+import Consolas from '/src/shared/consolas.js';
 
 Consolas.log('[D2CMedia Debug - devtool.js] loaded');
 
@@ -118,11 +86,11 @@ const PanelWriter = {
       return ``;
     }else{
       //il faudrait au moins checker si il y a du html dedans avec des <>
-      style =  '';
+      let style =  '';
       if(RegExp('^<.*>$','g').test(data)){
         style =  'prettyprint theme-snappy-light';    
       }
-      str = data.replace(/>/g,"&gt;").replace(/</g,"&lt;");
+      let str = data.replace(/>/g,"&gt;").replace(/</g,"&lt;");
       return `<pre class="${style}">${str}</pre>`;
     }
   },

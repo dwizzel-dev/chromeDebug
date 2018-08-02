@@ -3,39 +3,8 @@
 // D2CMedia presence on the page. If yes, create the D2CMedia panel; otherwise poll
 // for 10 seconds.
 
-//import Const from './constant';
-
-const Const = {
-  INIT: 0x201,
-  INJECT: 0x202,
-  CLEAR: 0x203,
-  LOADING: 0x204,
-  ONDATA: 0x302,
-  ONANALYSED: 0x303,
-  TOOLNAME: 'd2cmedia-devtool-inspector',
-  CONTENTNAME: 'd2cmedia-devtool-content'
-};
-
-const Consolas = {
-  log: function(data){
-    if(this.options.enabled){
-      console.log(data);
-    }
-  },
-  warn: function(data){
-    if(this.options.enabled){
-      console.warn(data);
-    }
-  },
-  error: function(data){
-    if(this.options.enabled){
-      console.error(data);
-    }
-  },
-  options: {
-      enabled: true,
-  },
-};
+import Const from '/src/shared/constant.js';
+import Consolas from '/src/shared/consolas.js';
 
 Consolas.log('[D2CMedia Debug - devtools-background.js] loaded');
 
@@ -43,7 +12,6 @@ let panelLoaded = false;
 let panelShown = false;
 let created = false;
 let checkCount = 0;
-
 
 
 // si on reload ou change de page que le inspect tab de "D2CMedia" est deja ouvert
