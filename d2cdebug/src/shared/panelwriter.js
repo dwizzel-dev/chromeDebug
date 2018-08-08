@@ -45,7 +45,7 @@ const PanelWriter = {
         //json viewer and style
         $(`.analysed-view .code`).addClass('treeview').jsonView(data);
         //on collapse celui-ci au premier niveau uniquement
-        $(`.analysed-view .treeview .collapser`).trigger('click');
+        $(`.analysed-view .treeview UL.mainLevel .collapser`).trigger('click');
       }
     }
   },
@@ -62,6 +62,8 @@ const PanelWriter = {
     if(this.scripts.length > 0){
       for(let o in this.scripts){
        $(`#${this.scripts[o].id} .code`).addClass('treeview').jsonView(this.scripts[o].data);
+       //on collapse celui-ci au premier niveau uniquement avec un trigger
+       $(`#${this.scripts[o].id} .treeview UL.mainLevel .collapser`).trigger('click');
       }
     }
   },

@@ -100,16 +100,10 @@ bgPageConnection.postMessage({
 function injectScript(scriptName, cb){
   const src = `
     (function() {
-
       //ceci est mieux et plus actuel
       const script = document.createElement('script');
       script.setAttribute("type", "module");
       script.setAttribute("src", "${scriptName}");
-      // var script = document.constructor.prototype.createElement.call(document, 'script');
-      // script.src = "${scriptName}";
-      // script.type = "module";
-      // console.log('[devtool.js] Injecting ${scriptName} script in content page');
-      // console.log(script);
       document.documentElement.appendChild(script);
       //script.parentNode.removeChild(script);
     })()

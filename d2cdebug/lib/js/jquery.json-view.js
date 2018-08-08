@@ -56,6 +56,8 @@
                     if (!level) {
                         level = 0;
                     }
+                    //add a main level controller for collapsing big data        
+                    var mainLevel = !level ? ' mainLevel ' : '';
 
                     var output = $('<span />', {
                         'class': 'block'
@@ -72,7 +74,7 @@
                     output.append(span('{', 'b'));
 
                     var items = $('<ul />', {
-                        'class': 'obj collapsible level' + level
+                        'class': 'obj collapsible level' + level + mainLevel
                     });
 
                     $.each(val, function(key, data) {
@@ -111,6 +113,8 @@
                         level = 0;
                     }
 
+                    var mainLevel = !level ? ' mainLevel ' : '';    
+
                     var cnt = val.length;
 
                     var output = $('<span />', {
@@ -127,7 +131,7 @@
                     output.append(span('[', 'b'));
 
                     var items = $('<ul />', {
-                        'class': 'obj collapsible level' + level
+                        'class': 'obj collapsible level' + level + mainLevel
                     });
 
                     $.each(val, function(key, data) {
