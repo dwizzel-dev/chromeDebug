@@ -14,7 +14,7 @@ h1{
 }
 
 div {
-  font-size: 1.0em;
+  font-size: 0.9rem;
 }
 div.content{
   margin-bottom: 10px;
@@ -55,7 +55,6 @@ h2 div.infos span.classname span.methodname{
 h2 div.infos span.file{
   color: #999;
   font-weight: normal;
-  font-size: 0.75rem;
   word-wrap: break-word;
   margin: 0;
   float: left;
@@ -92,7 +91,7 @@ h2 div.timer{
 
 h2 div.comments{
   /*font-weight: lighter;*/
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: darkkhaki;  
   float:left;
   clear:both;
@@ -120,10 +119,11 @@ div.cell.filter{
 
 /* timers*/
 div.row.timer h2{
-  font-size: 1.3rem;
+  font-size: 1rem;
+  padding: 10px;
 }
 div.row.timer h3{
-  font-size: 1.0rem;
+  font-size: 0.85rem;
   background-color: #ccc;
   width: 100%;
   padding: 5px 10px;
@@ -145,7 +145,6 @@ div.row.timer div.line{
   clear:both;
 }
 div.row.timer div.line.method{
-  font-size: 1rem;
   color: #80deea;
 }
 div.row.timer div.line.file{

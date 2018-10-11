@@ -17,6 +17,8 @@ const PanelWriter = {
           'Global' : data[o].from.class;
       let fromMethod = (data[o].from.method == null || data[o].from.method == '') ? 
           'Global' : data[o].from.method;
+      let filterDiv = (data[o].filter !== null && data[o].filter !== '') ?
+          `<div class="line filter">filter: ${data[o].filter}</div>` : '';  
       innerContent += `
       <h3>${o}</h3>  
         <div class="cell">
@@ -28,7 +30,7 @@ const PanelWriter = {
           </div>  
           <div class="line comments">${data[o].comments}</div>
           <div class="line diff">${data[o].diff} seconds</div>
-          <div class="line filter">filter: ${data[o].filter}</div>
+          ${filterDiv}
         </div>
       `;
     }
@@ -45,7 +47,7 @@ const PanelWriter = {
         let dealerId = data['dealerId'];
         output.innerHTML = `
           <div class="content">
-            <h2>D2C Media Basic Infos <span class="siteinfos">Site: ${siteId}, Dealer: ${dealerId}</span></h2>
+            <h2>D2C Media Basic Infos <span class="siteinfos">Site: ${siteId} | Dealer: ${dealerId}</span></h2>
             <div class="cell code"></div>
           </div>
         `;
