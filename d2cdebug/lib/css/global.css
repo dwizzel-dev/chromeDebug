@@ -35,7 +35,7 @@ h2 {
     background-color: #333;
     font-weight: normal;
     color: #86e1ff;
-    padding: 5px;
+    padding: 5px 10px;
     margin: 0;
     width: 100%;
     line-height: 1.2rem;
@@ -98,7 +98,7 @@ h2 div.comments{
 }
 
 div.cell{
-  padding: 5px 10px;
+  padding: 5px 10px
 }
 div.cell.code{
   background-color: #f8f8ff;
