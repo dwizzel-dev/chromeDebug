@@ -41,11 +41,23 @@ const PanelWriter = {
       if(data === Const.CLEAR){
         output.innerHTML = ``;  
       }else{
-        output.innerHTML = `<div class="content"><h2>SEO Basics</h2><div class="cell code"></div></div>`;
+        output.innerHTML = `
+          <div class="content">
+            <h2>Basic Infos</h2>
+            <div class="cell code"></div>
+          </div>
+        `;
         //json viewer and style
         $(`.analysed-view .code`).addClass('treeview').jsonView(data);
         //on collapse celui-ci au premier niveau uniquement
         $(`.analysed-view .treeview UL.mainLevel .collapser`).trigger('click');
+        //collapse group and trigger on title click
+        $(`.analysed-view .cell`).hide();
+        $(`.analysed-view h2`)
+          .css({'cursor':'pointer'})
+          .click(function(e){
+            $(`.analysed-view .cell`).toggle();
+          });
       }
     }
   },
@@ -66,6 +78,14 @@ const PanelWriter = {
        $(`#${this.scripts[o].id} .treeview UL.mainLevel .collapser`).trigger('click');
       }
     }
+    //collapse all cell that have a group-id from the content-view
+    //and make the title that have a group-id trigger on click event to toggle
+    $(`.content-view .cell.collapsable[group-id]`).hide();
+    $(`.content-view h2.collapser[group-id]`)
+      .css({'cursor':'pointer'})
+      .click(function(e){
+        $(`.content-view .cell.collapsable[group-id="` + $(this).attr('group-id') + `"]`).toggle();
+      });
   },
   prettyCode(){
     //indente le code si il y a lieu
@@ -97,7 +117,7 @@ const PanelWriter = {
     //
     return `
       <div class="row type-${data.type}" id="${id}">
-        <h2>
+        <h2 class="collapser" group-id="${id}">
           ${timer}
           ${group}
           <div class="infos">
@@ -106,8 +126,8 @@ const PanelWriter = {
           </div>  
           ${comments}
         </h2>  
-        <div class="cell code">${this.wrtObj(id, data.obj)}</div>
-        <div class="cell filter">Filter: ${data.filter}</div>
+        <div class="cell collapsable code" group-id="${id}">${this.wrtObj(id, data.obj)}</div>
+        <div class="cell collapsable filter" group-id="${id}">Filter: ${data.filter}</div>
       </div>`;
   },
   wrtObj(id, data){

@@ -10,6 +10,7 @@ h1{
 .container{
   max-width:100%;
   width:100%;
+  padding-top: 10px;
 }
 
 div {
@@ -26,7 +27,7 @@ div.row{
   background-color: #000;
   margin: 0 0 5px 0;
   padding: 0;
-  border-top: 1px solid #666;
+  border-top: 0px solid #666;
 }
 
 h2 {
@@ -34,10 +35,11 @@ h2 {
     background-color: #333;
     font-weight: normal;
     color: #86e1ff;
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     width: 100%;
-    line-height: 1.0rem;
+    line-height: 1.2rem;
+    box-sizing: border-box;
 }
 h2 div.infos{
   float: left;
