@@ -24,20 +24,20 @@ div.content span.msg{
 }
 div.row{
   background-color: #000;
-  margin: 0 0 20px 0;
+  margin: 0 0 5px 0;
   padding: 0;
   border-top: 1px solid #666;
 }
 
-h2{
-  font-size: 1.0em;
-  background-color: #333;
-  font-weight: normal;
-  color: #86e1ff;
-  padding: 10px;
-  margin: 0;
-  width: 100%;
-  line-height: 28px;
+h2 {
+    font-size: 0.85rem;
+    background-color: #333;
+    font-weight: normal;
+    color: #86e1ff;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    line-height: 1.0rem;
 }
 h2 div.infos{
   float: left;
@@ -90,7 +90,7 @@ h2 div.timer{
 
 h2 div.comments{
   /*font-weight: lighter;*/
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: darkkhaki;  
   float:left;
   clear:both;
@@ -112,7 +112,7 @@ div.cell.code.treeview{
 }
 div.cell.filter{
   color: #888;
-  font-size: 0.8em;
+  font-size: 0.6rem;
 }
 
 
@@ -124,7 +124,7 @@ div.row.timer h3{
   font-size: 1.0rem;
   background-color: #ccc;
   width: 100%;
-  padding: 10px;
+  padding: 5px 10px;
   float: left;
   margin: 0;
   text-transform: capitalize;
@@ -153,11 +153,11 @@ div.row.timer div.line.file{
 div.row.timer div.line.comments{
   font-size: 0.8rem;
   color: darkkhaki;
-  padding: 5px 0px;
+  padding: 0px;
 }
 div.row.timer div.line.diff {
   font-size: 1.1rem;
-  padding: 10px 0;
+  padding: 0;
 }
 div.row.timer div.line.filter {
   font-size: 0.75rem;
@@ -174,7 +174,7 @@ pre{
   white-space: pre-wrap !important;
   border: 0 !important;
   background: none !important;
-  padding: 20px !important;
+  padding: 10px !important;
   margin:0;
 }
 
