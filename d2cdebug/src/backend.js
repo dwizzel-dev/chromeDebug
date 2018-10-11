@@ -8,6 +8,17 @@ import Consolas from '/src/shared/consolas.js';
 
 
 const PageAnalyser = {
+  getSiteInfos(){
+    let arr = [];
+    //the topsite id
+    let nodes = document.querySelectorAll(`input[id="topsiteid"]`);
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        arr[nodes[i].id] = nodes[i].value.replace(/(\r\n|\n|\r)/gm,"").trim();
+      }
+    }
+    return arr;
+  },
   getTag(tag){
     let arr = [];
     let nodes = document.querySelectorAll(tag);
@@ -20,10 +31,20 @@ const PageAnalyser = {
   },
   getInput(type){
     let arr = {};
+    let cmpt = 0;
+    let defaultKeyName = 'noname-';
     let nodes = document.querySelectorAll(`input[type="${type}"]`);
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr[nodes[i].name] = nodes[i].value.replace(/(\r\n|\n|\r)/gm,"").trim();
+        let value = nodes[i].value.replace(/(\r\n|\n|\r)/gm,"").trim();
+        if(typeof nodes[i].name !== 'undefined' && nodes[i].name !== ''){
+          arr[nodes[i].name] = value;
+        }else if(typeof nodes[i].id !== 'undefined' && nodes[i].id !== ''){
+          arr[nodes[i].id] = value;
+        }else{
+          //default name with increment
+          arr[defaultKeyName + (cmpt++)] = value;
+        }  
       }
     }
     return arr;
@@ -75,6 +96,7 @@ const PageAnalyser = {
   },
   getAll(){
     return {
+      infos: this.getSiteInfos(),
       title: this.getTitle(),
       meta: this.getMeta(),
       h1: this.getTag('h1'),
@@ -88,7 +110,7 @@ const PageAnalyser = {
 // on envoie un message au hooks.js qui ecoute
 Consolas.log('[backend.js] sending message to [hooks.js]');
 
-if(typeof window.D2CMediaDebug !== "undefined"){
+if(typeof window.D2CMediaDebug !== 'undefined'){
   
   window.postMessage({
     source: Const.CONTENTNAME,

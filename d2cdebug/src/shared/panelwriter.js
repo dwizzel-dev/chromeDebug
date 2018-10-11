@@ -43,7 +43,7 @@ const PanelWriter = {
       }else{
         output.innerHTML = `
           <div class="content">
-            <h2>Basic Infos</h2>
+            <h2>D2C Media Basic Infos</h2>
             <div class="cell code"></div>
           </div>
         `;
