@@ -8,16 +8,27 @@ import Consolas from '/src/shared/consolas.js';
 
 
 const PageAnalyser = {
-  getSiteInfos(){
+  getSiteId(){
     let arr = [];
-    //the topsite id
+    //site id
     let nodes = document.querySelectorAll(`input[id="topsiteid"]`);
     if(nodes !== null){
       for(let i=0; i<nodes.length;i++){
-        arr[nodes[i].id] = nodes[i].value.replace(/(\r\n|\n|\r)/gm,"").trim();
+        return nodes[i].value;
       }
     }
-    return arr;
+    return '';
+  },
+  getDealerId(){
+    let arr = [];
+    //dealer id
+    let nodes = document.querySelectorAll(`input[id="basedealerid"]`);
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        return nodes[i].value;
+      }
+    }
+    return '';
   },
   getTag(tag){
     let arr = [];
@@ -96,7 +107,8 @@ const PageAnalyser = {
   },
   getAll(){
     return {
-      infos: this.getSiteInfos(),
+      siteId: this.getSiteId(),
+      dealerId: this.getDealerId(),
       title: this.getTitle(),
       meta: this.getMeta(),
       h1: this.getTag('h1'),
@@ -112,6 +124,8 @@ Consolas.log('[backend.js] sending message to [hooks.js]');
 
 if(typeof window.D2CMediaDebug !== 'undefined'){
   
+  let pgData = PageAnalyser.getAll(); 
+
   window.postMessage({
     source: Const.CONTENTNAME,
     command: Const.LOAD,
@@ -121,7 +135,7 @@ if(typeof window.D2CMediaDebug !== 'undefined'){
   window.postMessage({
     source: Const.CONTENTNAME,
     command: Const.ANALYSED,
-    data: PageAnalyser.getAll()
+    data: pgData
   }, '*');
 
   //send a message to the devtool-background.js from the javascript in the content-page via the hook.js

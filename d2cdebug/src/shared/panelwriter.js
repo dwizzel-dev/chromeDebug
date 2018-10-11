@@ -41,9 +41,11 @@ const PanelWriter = {
       if(data === Const.CLEAR){
         output.innerHTML = ``;  
       }else{
+        let siteId = data['siteId'];
+        let dealerId = data['dealerId'];
         output.innerHTML = `
           <div class="content">
-            <h2>D2C Media Basic Infos</h2>
+            <h2>D2C Media Basic Infos <span class="siteinfos">Site: ${siteId}, Dealer: ${dealerId}</span></h2>
             <div class="cell code"></div>
           </div>
         `;

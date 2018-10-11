@@ -190,6 +190,10 @@ pre{
   line-height: inherit;
 }
 
+.analysed-view h2 span.siteinfos{
+  float:right;
+}
+
 /* line wrappers */
 @media only screen and (min-width: 960px) {
 	h2 div.infos span.file{
