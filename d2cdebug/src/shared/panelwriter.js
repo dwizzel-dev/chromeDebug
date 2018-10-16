@@ -141,10 +141,11 @@ const PanelWriter = {
     }else{
       //il faudrait au moins checker si il y a du html dedans avec des <>
       let style =  '';
-      if(RegExp('^<.*>$','g').test(data)){
+      let str = data + '';
+      if(RegExp('^<.*>$','g').test(str)){
         style =  'prettyprint theme-snappy-light';    
       }
-      let str = data.replace(/>/g,"&gt;").replace(/</g,"&lt;");
+      str = str.replace(/>/g,"&gt;").replace(/</g,"&lt;");
       return `<pre class="${style}">${str}</pre>`;
     }
   },
