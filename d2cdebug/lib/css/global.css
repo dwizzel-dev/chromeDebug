@@ -41,6 +41,9 @@ h2 {
     line-height: 1.2rem;
     box-sizing: border-box;
 }
+h2.collapser:hover {
+  opacity: 0.7;
+}
 h2 div.infos{
   float: left;
   width: 100%;
@@ -66,10 +69,10 @@ h2 div.infos span.file span.line{
 }
 
 div.row.type-2 h2{
-  background-color: #074e9a;
+  background-color: #75270f;
 }
 div.row.type-3 h2{
-  background-color: #c80000;
+  background-color: rgb(111, 7, 7);
 }
 div.row.type-4 h2{
   background-color: #236e25;
