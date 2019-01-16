@@ -17,7 +17,7 @@ window.addEventListener('message', event => {
     return;
   }
   Consolas.log('[hooks.js] onEvent');
-  Consolas.log(message);
+  //Consolas.log(message);
   
   if(typeof message.command !== "undefined" && typeof message.data !== 'undefined'){
     switch(message.command){

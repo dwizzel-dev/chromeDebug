@@ -74,7 +74,7 @@ chrome.runtime.onConnect.addListener(portConnection => {
   //ecoute poue les message venant de devtools.js
   var portListener = (message, sender, sendResponse) => {
     Consolas.log('[devtools-background.js] portConnection.onMessage:');
-    Consolas.log(message);
+    //Consolas.log(message);
     //on set le port pour cette connection pour pouvoir reparler avec a devtools.js
     connections[message.tabId] = portConnection;
     //on reparle a la devtools.js comme quoi on bien recu son message
@@ -133,7 +133,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 // les messages que l'on recoit de hooks.js on relai au devtools.js du tab associe
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   Consolas.log('[devtools-background.js] chrome.runtime.onMessage:');
-  Consolas.log(message);
+  //Consolas.log(message);
   connections[sender.tab.id].postMessage(message);
   return true;
 });

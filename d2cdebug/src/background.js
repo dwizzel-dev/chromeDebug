@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-
+/*
 chrome.runtime.onInstalled.addListener(function() {
   // When the app gets installed
   //creer un menu contextuel
@@ -30,3 +30,4 @@ chrome.runtime.onInstalled.addListener(function() {
     contexts: ['all']
   });
 });
+*/

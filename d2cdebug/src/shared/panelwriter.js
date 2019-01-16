@@ -151,7 +151,7 @@ const PanelWriter = {
   },
   wrt(data){
     Consolas.log('[devtool.js] data received');
-    Consolas.log(data);
+    //Consolas.log(data);
     this.resetScripts();
     let content = '';
     switch(data){

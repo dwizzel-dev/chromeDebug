@@ -15,7 +15,7 @@ var bgPageConnection = chrome.runtime.connect({
 //ecoute pour les message de la devtools-background.js
 bgPageConnection.onMessage.addListener(message => {
   Consolas.log('[devtool.js] message from [devtools-background.js]');
-  Consolas.log(message);
+  //Consolas.log(message);
   //message from the devtools-background.js to inject javascript code to the content
   if(typeof message.name !== 'undefined' && typeof message.command !== 'undefined'){
     if(message.name == Const.TOOLNAME){
@@ -73,7 +73,7 @@ bgPageConnection.onMessage.addListener(message => {
           break;  
         case Const.ONEXTERNDATA:
           Consolas.log('[devtool.js] ONEXTERNDATA');
-          Consolas.log(message.data);
+          //Consolas.log(message.data);
           break;    
         default:
           break;  
@@ -85,7 +85,7 @@ bgPageConnection.onMessage.addListener(message => {
 //ecoute les deconnxion de la devtools-background.js
 bgPageConnection.onDisconnect.addListener(message => {
   Consolas.log('[devtool.js] disconnection of [devtools-background.js]');
-  Consolas.log(message);
+  //Consolas.log(message);
 });
 
 //envoie un message a la devtools-background.js

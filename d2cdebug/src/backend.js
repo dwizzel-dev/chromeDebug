@@ -40,6 +40,16 @@ const PageAnalyser = {
     }
     return arr;
   },
+  getLink(){
+    let arr = [];
+    let nodes = document.querySelectorAll('a');
+    if(nodes !== null){
+      for(let i=0; i<nodes.length;i++){
+        arr.push(nodes[i].innerText.replace(/(\r\n|\n|\r)/gm,"").trim()); 
+      }
+    }
+    return arr;
+  },
   getInput(type){
     let arr = {};
     let cmpt = 0;
@@ -114,6 +124,7 @@ const PageAnalyser = {
       h1: this.getTag('h1'),
       h2: this.getTag('h2'),
       h3: this.getTag('h3'),
+      alink: this.getLink(),
       hidden: this.getInput('hidden'),
     }
   },
