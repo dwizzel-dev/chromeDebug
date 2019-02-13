@@ -83,6 +83,9 @@ div.row.type-5 h2{
 div.row.type-6 h2{ 
   background-color: #2f3f46;
 }
+div.row.type-7 h2{ 
+  background-color: #4a148c;
+}
 h2 div.group,
 h2 div.timer{
   font-weight: normal;
