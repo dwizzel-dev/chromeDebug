@@ -80,10 +80,14 @@ chrome.runtime.onConnect.addListener(portConnection => {
     //on reparle a la devtools.js comme quoi on bien recu son message
     if(typeof message.name !== 'undefined' && typeof message.command !== 'undefined' 
       && message.name === Const.TOOLNAME && message.command === Const.INIT){
-      connections[message.tabId].postMessage({
-        name: Const.TOOLNAME,
-        command: Const.INJECT
-      });
+      try{  
+        connections[message.tabId].postMessage({
+          name: Const.TOOLNAME,
+          command: Const.INJECT
+        });
+      }catch(excp){
+        Consolas.error(excp);
+      }  
     }
   }
   //put the function as the listener
